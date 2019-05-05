@@ -1,7 +1,6 @@
 ---
-name: "vpub-win-0.1"
+name: "vpub-win-1.0"
 enable_cache: true
-sudo: true
 suites:
 - "trusty"
 architectures:
@@ -9,7 +8,7 @@ architectures:
 packages:
 - "curl"
 - "g++"
-- "git"
+- "git-core"
 - "pkg-config"
 - "autoconf"
 - "libtool"
@@ -22,7 +21,6 @@ packages:
 - "zip"
 - "ca-certificates"
 - "python"
-- "build-essential"
 remotes:
 - "url": "https://github.com/vpubchain/particl-core.git"
   "dir": "particl-core"
@@ -30,8 +28,8 @@ files: []
 script: |
   WRAP_DIR=$HOME/wrapped
   HOSTS="i686-w64-mingw32 x86_64-w64-mingw32"
-  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests --enable-usbdevice"
-  FAKETIME_HOST_PROGS="ar ranlib nm windres strip objcopy"
+  CONFIGFLAGS="--enable-reduce-exports --disable-bench --disable-gui-tests"
+  FAKETIME_HOST_PROGS="g++ ar ranlib nm windres strip objcopy"
   FAKETIME_PROGS="date makensis zip"
   HOST_CFLAGS="-O2 -g"
   HOST_CXXFLAGS="-O2 -g"
