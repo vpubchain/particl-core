@@ -24,7 +24,7 @@ echo "$RUN_FUNCTIONAL_TESTS"
 
 if [ "$RUN_FUNCTIONAL_TESTS" = "true" ]; then
   BEGIN_FOLD functional-tests
-  DOCKER_EXEC test/functional/test_runner.py --ci --combinedlogslen=4000 --coverage --quiet --failfast --particl --insight --bitcoin
+  DOCKER_EXEC test/functional/test_runner.py --ci --combinedlogslen=4000 --coverage --quiet --failfast --vpub --insight --bitcoin
   END_FOLD
 fi
 
