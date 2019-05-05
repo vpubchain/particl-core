@@ -3,7 +3,7 @@ name: "vpub-win-0.1"
 enable_cache: true
 sudo: true
 suites:
-- "bionic"
+- "trusty"
 architectures:
 - "amd64"
 packages:

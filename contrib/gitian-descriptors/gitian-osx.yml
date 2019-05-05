@@ -2,7 +2,7 @@
 name: "particl-osx-0.18.0.4"
 enable_cache: true
 suites:
-- "bionic"
+- "trusty"
 architectures:
 - "amd64"
 packages:
