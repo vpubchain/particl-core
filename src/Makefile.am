@@ -602,16 +602,16 @@ nodist_libparticl_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-particld_SOURCES = bitcoind.cpp
-particld_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-particld_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-particld_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+vpubd_SOURCES = bitcoind.cpp
+vpubd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+vpubd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vpubd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-particld_SOURCES += bitcoind-res.rc
+vpubd_SOURCES += bitcoind-res.rc
 endif
 
-particld_LDADD = \
+vpubd_LDADD = \
   $(LIBPARTICL_SERVER) \
   $(LIBPARTICL_WALLET) \
   $(LIBPARTICL_COMMON) \
@@ -627,9 +627,9 @@ particld_LDADD = \
   $(LIBPARTICL_SMSG) \
   $(LIBPARTICL_USBDEVICE)
 
-particld_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+vpubd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 if ENABLE_USBDEVICE
-particld_LDADD += $(USB_LIBS) $(HIDAPI_LIBS) $(PROTOBUF_LIBS)
+vpubd_LDADD += $(USB_LIBS) $(HIDAPI_LIBS) $(PROTOBUF_LIBS)
 endif
 
 # bitcoin-cli binary #
