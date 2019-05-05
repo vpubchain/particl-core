@@ -167,7 +167,7 @@ message TxRequest {
     message TxRequestSerializedType {
         optional uint32 signature_index = 1;    // 'signature' field contains signed input of this index
         optional bytes signature = 2;           // signature of the signature_index input
-        optional bytes serialized_tx = 3;       // part of serialized and signed transaction
+        optional bytes serialized_tx = 3;       // vp of serialized and signed transaction
     }
 }
 

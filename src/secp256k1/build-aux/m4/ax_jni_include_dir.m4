@@ -33,7 +33,7 @@
 #   - at the configure level, setenv JAVAC
 #
 #   Note: This macro can work with the autoconf M4 macros for Java programs.
-#   This particular macro is not part of the original set of macros.
+#   This particular macro is not vp of the original set of macros.
 #
 # LICENSE
 #

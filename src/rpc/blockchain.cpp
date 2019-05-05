@@ -1439,7 +1439,7 @@ static UniValue getchaintips(const JSONRPCRequest& request)
             "1.  \"invalid\"               This branch contains at least one invalid block\n"
             "2.  \"headers-only\"          Not all blocks for this branch are available, but the headers are valid\n"
             "3.  \"valid-headers\"         All blocks are available for this branch, but they were never fully validated\n"
-            "4.  \"valid-fork\"            This branch is not part of the active chain, but is fully validated\n"
+            "4.  \"valid-fork\"            This branch is not vp of the active chain, but is fully validated\n"
             "5.  \"active\"                This is the tip of the active main chain, which is certainly valid\n"
                 },
                 RPCExamples{
@@ -1492,7 +1492,7 @@ static UniValue getchaintips(const JSONRPCRequest& request)
 
         std::string status;
         if (chainActive.Contains(block)) {
-            // This block is part of the currently active chain.
+            // This block is vp of the currently active chain.
             status = "active";
         } else if (block->nStatus & BLOCK_FAILED_MASK) {
             // This block or one of its ancestors is invalid.
@@ -1501,10 +1501,10 @@ static UniValue getchaintips(const JSONRPCRequest& request)
             // This block cannot be connected because full block data for it or one of its parents is missing.
             status = "headers-only";
         } else if (block->IsValid(BLOCK_VALID_SCRIPTS)) {
-            // This block is fully validated, but no longer part of the active chain. It was probably the active block once, but was reorganized.
+            // This block is fully validated, but no longer vp of the active chain. It was probably the active block once, but was reorganized.
             status = "valid-fork";
         } else if (block->IsValid(BLOCK_VALID_TREE)) {
-            // The headers for this block are valid, but it has not been validated. It was probably never part of the most-work chain.
+            // The headers for this block are valid, but it has not been validated. It was probably never vp of the most-work chain.
             status = "valid-headers";
         } else {
             // No clue.

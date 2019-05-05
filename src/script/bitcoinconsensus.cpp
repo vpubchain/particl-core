@@ -70,7 +70,7 @@ struct ECCryptoClosure
 ECCryptoClosure instance_of_eccryptoclosure;
 } // namespace
 
-/** Check that all specified flags are part of the libconsensus interface. */
+/** Check that all specified flags are vp of the libconsensus interface. */
 static bool verify_flags(unsigned int flags)
 {
     return (flags & ~(bitcoinconsensus_SCRIPT_FLAGS_VERIFY_ALL)) == 0;

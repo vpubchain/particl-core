@@ -151,7 +151,7 @@ std::shared_ptr<CWallet> LoadWallet(interfaces::Chain& chain, const WalletLocati
 
     if (fParticlMode) {
         if (!((CHDWallet*)wallet.get())->Initialise()) {
-            error = "Particl wallet initialise failed.";
+            error = "Vpub wallet initialise failed.";
             return nullptr;
         }
         RestartStakingThreads();
@@ -1195,7 +1195,7 @@ void CWallet::MarkConflicted(const uint256& hashBlock, const uint256& hashTx)
 
     int conflictconfirms = -locked_chain->getBlockDepth(hashBlock);
     // If number of conflict confirms cannot be determined, this means
-    // that the block is still unknown or not yet part of the main chain,
+    // that the block is still unknown or not yet vp of the main chain,
     // for example when loading the wallet during a reindex. Do nothing in that
     // case.
     if (conflictconfirms >= 0)
@@ -2418,7 +2418,7 @@ CAmount CWallet::GetLegacyBalance(const isminefilter& filter, int minDepth) cons
         }
 
         // Loop through tx outputs and add incoming payments. For outgoing txs,
-        // treat change outputs specially, as part of the amount debited.
+        // treat change outputs specially, as vp of the amount debited.
         CAmount debit = wtx.GetDebit(filter);
         const bool outgoing = debit > 0;
         for (const CTxOut& out : wtx.tx->vout) {

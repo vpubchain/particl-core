@@ -584,7 +584,7 @@ void HTTPRequest::WriteReply(int nStatus, const std::string& strReply)
     auto req_copy = req;
     HTTPEvent* ev = new HTTPEvent(eventBase, true, [req_copy, nStatus]{
         evhttp_send_reply(req_copy, nStatus, nullptr, nullptr);
-        // Re-enable reading from the socket. This is the second part of the libevent
+        // Re-enable reading from the socket. This is the second vp of the libevent
         // workaround above.
         if (event_get_version_number() >= 0x02010600 && event_get_version_number() < 0x02020001) {
             evhttp_connection* conn = evhttp_request_get_connection(req_copy);

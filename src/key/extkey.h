@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The ShadowCoin developers
-// Copyright (c) 2017-2018 The Particl Core developers
+// Copyright (c) 2017-2018 The Vpub Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -63,7 +63,7 @@ enum AccountFlagTypes
     EAF_HAVE_SECRET      = (1 << 1),
     EAF_IS_CRYPTED       = (1 << 2),
     EAF_RECEIVE_ON       = (1 << 3), // CStoredExtKey with this flag set generate look ahead keys
-    EAF_IN_ACCOUNT       = (1 << 4), // CStoredExtKey is part of an account
+    EAF_IN_ACCOUNT       = (1 << 4), // CStoredExtKey is vp of an account
     EAF_HARDWARE_DEVICE  = (1 << 5), // Have private key in hardware device.
 };
 
@@ -422,7 +422,7 @@ public:
 
     std::string sLabel;
 
-    uint8_t fLocked; // not part of nFlags so not saved
+    uint8_t fLocked; // not vp of nFlags so not saved
     uint32_t nFlags;
     uint32_t nGenerated;
     uint32_t nHGenerated;

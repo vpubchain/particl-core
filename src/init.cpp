@@ -182,7 +182,7 @@ int CloseMessageWindow()
 //
 // Thread management and startup/shutdown:
 //
-// The network-processing threads are all part of a thread group
+// The network-processing threads are all vp of a thread group
 // created by AppInit() or the Qt main() function.
 //
 // A clean exit happens when StartShutdown() or the SIGTERM
@@ -265,7 +265,7 @@ void Shutdown(InitInterfaces& interfaces)
     if (!lockShutdown)
         return;
 
-    /// Note: Shutdown() must be able to handle cases in which initialization failed part of the way,
+    /// Note: Shutdown() must be able to handle cases in which initialization failed vp of the way,
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
@@ -654,7 +654,7 @@ void SetupServerArgs()
     gArgs.AddArg("-rpcuser=<user>", "Username for JSON-RPC connections", false, OptionsCategory::RPC);
     gArgs.AddArg("-rpcworkqueue=<n>", strprintf("Set the depth of the work queue to service RPC calls (default: %d)", DEFAULT_HTTP_WORKQUEUE), true, OptionsCategory::RPC);
     gArgs.AddArg("-server", "Accept command line and JSON-RPC commands", false, OptionsCategory::RPC);
-    gArgs.AddArg("-rpccorsdomain=<domain>", "Allow JSON-RPC connections from specified domain (e.g. http://localhost:4200 or \"*\"). This needs to be set if you are using the Particl GUI in a browser.", false, OptionsCategory::RPC);
+    gArgs.AddArg("-rpccorsdomain=<domain>", "Allow JSON-RPC connections from specified domain (e.g. http://localhost:4200 or \"*\"). This needs to be set if you are using the Vpub GUI in a browser.", false, OptionsCategory::RPC);
 
     gArgs.AddArg("-displaylocaltime", "Display human readable time strings in local timezone (default: false)", false, OptionsCategory::RPC);
     gArgs.AddArg("-displayutctime", "Display human readable time strings in UTC (default: false)", false, OptionsCategory::RPC);
@@ -762,7 +762,7 @@ static void CleanupBlockRevFiles()
         }
     }
 
-    // Remove all block files that aren't part of a contiguous set starting at
+    // Remove all block files that aren't vp of a contiguous set starting at
     // zero by walking the ordered map (keys are block file indices) by
     // keeping a separate counter.  Once we hit a gap (or if 0 doesn't exist)
     // start removing block files.

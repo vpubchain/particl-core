@@ -566,8 +566,8 @@ void SendCoinsDialog::clear()
         ui->entries->takeAt(0)->widget()->deleteLater();
     }
 
-    ui->cbxTypeFrom->setCurrentIndex(ui->cbxTypeFrom->findText("Part"));
-    ui->cbxTypeTo->setCurrentIndex(ui->cbxTypeTo->findText("Part"));
+    ui->cbxTypeFrom->setCurrentIndex(ui->cbxTypeFrom->findText("Vp"));
+    ui->cbxTypeTo->setCurrentIndex(ui->cbxTypeTo->findText("Vp"));
 
     addEntry();
 
@@ -1017,7 +1017,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!IsValidDestination(dest)) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Particl address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Vpub address"));
         }
         else // Valid address
         {
@@ -1027,7 +1027,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
                 ui->labelCoinControlChangeLabel->setText(tr("Warning: Unknown change address"));
 
                 // confirmation dialog
-                QMessageBox::StandardButton btnRetVal = QMessageBox::question(this, tr("Confirm custom change address"), tr("The address you selected for change is not part of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?"),
+                QMessageBox::StandardButton btnRetVal = QMessageBox::question(this, tr("Confirm custom change address"), tr("The address you selected for change is not vp of this wallet. Any or all funds in your wallet may be sent to this address. Are you sure?"),
                     QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Cancel);
 
                 if(btnRetVal == QMessageBox::Yes)

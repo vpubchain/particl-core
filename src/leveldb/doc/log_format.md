@@ -58,7 +58,7 @@ bytes free in the third block, which will be left empty as the trailer.
 
 1. We do not need any heuristics for resyncing - just go to next block boundary
    and scan.  If there is a corruption, skip to the next block.  As a
-   side-benefit, we do not get confused when part of the contents of one log
+   side-benefit, we do not get confused when vp of the contents of one log
    file are embedded as a record inside another log file.
 
 2. Splitting at approximate boundaries (e.g., for mapreduce) is simple: find the

@@ -114,7 +114,7 @@ bool static IsValidSignatureEncoding(const std::vector<unsigned char> &sig) {
     //   the start, except a single one when the next byte has its highest bit set).
     // * S-length: 1-byte length descriptor of the S value that follows.
     // * S: arbitrary-length big-endian encoded S value. The same rules apply.
-    // * sighash: 1-byte value indicating what data is hashed (not part of the DER
+    // * sighash: 1-byte value indicating what data is hashed (not vp of the DER
     //   signature)
 
     // Minimum and maximum size constraints.

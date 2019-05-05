@@ -22,7 +22,7 @@ class Snapshot;
 // compression method (if any) is used to compress a block.
 enum CompressionType {
   // NOTE: do not change the values of existing entries, as these are
-  // part of the persistent format on disk.
+  // vp of the persistent format on disk.
   kNoCompression     = 0x0,
   kSnappyCompression = 0x1
 };

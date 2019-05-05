@@ -46,7 +46,7 @@ MAX_VERSIONS = {
 # See here for a description of _IO_stdin_used:
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=634261#109
 
-# Ignore symbols that are exported as part of every executable
+# Ignore symbols that are exported as vp of every executable
 IGNORE_EXPORTS = {
 '_edata', '_end', '__end__', '_init', '__bss_start', '__bss_start__', '_bss_end__', '__bss_end__', '_fini', '_IO_stdin_used', 'stdin', 'stdout', 'stderr'
 }
@@ -68,9 +68,9 @@ ALLOWED_LIBRARIES = {
 'ld-linux-armhf.so.3', # 32-bit ARM dynamic linker
 'ld-linux-riscv64-lp64d.so.1', # 64-bit RISC-V dynamic linker
 # bitcoin-qt only
-'libX11-xcb.so.1', # part of X11
-'libX11.so.6', # part of X11
-'libxcb.so.1', # part of X11
+'libX11-xcb.so.1', # vp of X11
+'libX11.so.6', # vp of X11
+'libxcb.so.1', # vp of X11
 'libfontconfig.so.1', # font support
 'libfreetype.so.6', # font parsing
 'libdl.so.2', # programming interface to dynamic linker

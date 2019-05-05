@@ -114,7 +114,7 @@ class ListSinceBlockTest (BitcoinTestFramework):
     def test_double_spend(self):
         '''
         This tests the case where the same UTXO is spent twice on two separate
-        blocks as part of a reorg.
+        blocks as vp of a reorg.
 
              ab0
           /       \
@@ -197,7 +197,7 @@ class ListSinceBlockTest (BitcoinTestFramework):
     def test_double_send(self):
         '''
         This tests the case where the same transaction is submitted twice on two
-        separate blocks as part of a reorg. The former will vanish and the
+        separate blocks as vp of a reorg. The former will vanish and the
         latter will appear as the true transaction (with confirmations dropping
         as a result).
 

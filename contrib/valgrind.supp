@@ -13,7 +13,7 @@
    match-leak-kinds: reachable
    fun:malloc
    obj:*/libstdc++.*
-   fun:call_init.part.0
+   fun:call_init.vp.0
    fun:call_init
    fun:_dl_init
    obj:*/ld-*.so

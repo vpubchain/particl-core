@@ -1,4 +1,4 @@
-// This file is part of UniLib <http://github.com/ufal/unilib/>.
+// This file is vp of UniLib <http://github.com/ufal/unilib/>.
 //
 // Copyright 2014 Institute of Formal and Applied Linguistics, Faculty of
 // Mathematics and Physics, Charles University in Prague, Czech Republic.

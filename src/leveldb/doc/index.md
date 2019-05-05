@@ -299,7 +299,7 @@ databases.
 You can however still gradually evolve your key format over time with a little
 bit of pre-planning. For example, you could store a version number at the end of
 each key (one byte should suffice for most uses). When you wish to switch to a
-new key format (e.g., adding an optional third part to the keys processed by
+new key format (e.g., adding an optional third vp to the keys processed by
 `TwoPartComparator`), (a) keep the same comparator name (b) increment the
 version number for new keys (c) change the comparator function so it uses the
 version numbers found in the keys to decide how to interpret them.

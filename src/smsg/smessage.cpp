@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The ShadowCoin developers
-// Copyright (c) 2017-2019 The Particl Core developers
+// Copyright (c) 2017-2019 The Vpub Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -512,7 +512,7 @@ int CSMSG::BuildBucketSet()
             continue;
         }
 
-        if (part::endsWith(fileName, "_wl.dat")) {
+        if (vp::endsWith(fileName, "_wl.dat")) {
             LogPrint(BCLog::SMSG, "Skipping wallet locked file: %s.\n", fileName);
             continue;
         }
@@ -1929,7 +1929,7 @@ bool CSMSG::ScanBuckets()
             continue;
         }
 
-        if (part::endsWith(fileName, "_wl.dat")) {
+        if (vp::endsWith(fileName, "_wl.dat")) {
             // ScanBuckets must be run with unlocked wallet (if any receiving keys are wallet keys), remove any redundant _wl files
             LogPrint(BCLog::SMSG, "Removing wallet locked file: %s.\n", fileName);
             try { fs::remove(itd->path());
@@ -2073,7 +2073,7 @@ int CSMSG::WalletUnlocked()
 
         std::string fileName = itd->path().filename().string();
 
-        if (!part::endsWith(fileName, "_wl.dat")) {
+        if (!vp::endsWith(fileName, "_wl.dat")) {
             continue;
         }
 
@@ -3230,7 +3230,7 @@ int CSMSG::Validate(const uint8_t *pHeader, const uint8_t *pPayload, uint32_t nP
         rv = SMSG_NO_ERROR; // smsg is valid
     }
 
-    if (part::memcmp_nta(psmsg->hash, sha256Hash, 4) != 0) {
+    if (vp::memcmp_nta(psmsg->hash, sha256Hash, 4) != 0) {
         LogPrint(BCLog::SMSG, "Checksum mismatch.\n");
         rv = SMSG_CHECKSUM_MISMATCH; // checksum mismatch
     }
@@ -3888,7 +3888,7 @@ int CSMSG::Decrypt(bool fTestOnly, const CKey &keyDest, const CKeyID &address, c
     ctx.Write((uint8_t*) pPayload, nPayload);
     ctx.Finalize(MAC);
 
-    if (part::memcmp_nta(MAC, psmsg->mac, 32) != 0) {
+    if (vp::memcmp_nta(MAC, psmsg->mac, 32) != 0) {
         LogPrint(BCLog::SMSG, "MAC does not match.\n"); // expected if message is not to address on node
         return SMSG_MAC_MISMATCH;
     }

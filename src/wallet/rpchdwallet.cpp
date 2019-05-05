@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2019 The Particl Core developers
+// Copyright (c) 2017-2019 The Vpub Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -71,7 +71,7 @@ static int ExtractBip32InfoV(const std::vector<uint8_t> &vchKey, UniValue &keyIn
 
     CChainParams::Base58Type typePk = CChainParams::EXT_PUBLIC_KEY;
     if (memcmp(&vchKey[0], &Params().Base58Prefix(CChainParams::EXT_SECRET_KEY)[0], 4) == 0) {
-        keyInfo.pushKV("type", "Particl extended secret key");
+        keyInfo.pushKV("type", "Vpub extended secret key");
     } else
     if (memcmp(&vchKey[0], &Params().Base58Prefix(CChainParams::EXT_SECRET_KEY_BTC)[0], 4) == 0) {
         keyInfo.pushKV("type", "Bitcoin extended secret key");
@@ -113,7 +113,7 @@ static int ExtractBip32InfoP(const std::vector<uint8_t> &vchKey, UniValue &keyIn
     CExtPubKey pk;
 
     if (memcmp(&vchKey[0], &Params().Base58Prefix(CChainParams::EXT_PUBLIC_KEY)[0], 4) == 0) {
-        keyInfo.pushKV("type", "Particl extended public key");
+        keyInfo.pushKV("type", "Vpub extended public key");
     } else
     if (memcmp(&vchKey[0], &Params().Base58Prefix(CChainParams::EXT_PUBLIC_KEY_BTC)[0], 4) == 0)  {
         keyInfo.pushKV("type", "Bitcoin extended public key");
@@ -610,7 +610,7 @@ static int ManageExtKey(CStoredExtKey &sek, std::string &sOptName, std::string &
     } else
     if (sOptName == "active") {
         if (sOptValue.length() > 0) {
-            if (part::IsStringBoolPositive(sOptValue)) {
+            if (vp::IsStringBoolPositive(sOptValue)) {
                 sek.nFlags |= EAF_ACTIVE;
             } else {
                 sek.nFlags &= ~EAF_ACTIVE;
@@ -621,7 +621,7 @@ static int ManageExtKey(CStoredExtKey &sek, std::string &sOptName, std::string &
     } else
     if (sOptName == "receive_on") {
         if (sOptValue.length() > 0) {
-            if (part::IsStringBoolPositive(sOptValue)) {
+            if (vp::IsStringBoolPositive(sOptValue)) {
                 sek.nFlags |= EAF_RECEIVE_ON;
             } else {
                 sek.nFlags &= ~EAF_RECEIVE_ON;
@@ -683,7 +683,7 @@ static int ManageExtAccount(CExtKeyAccount &sea, std::string &sOptName, std::str
     } else
     if (sOptName == "active") {
         if (sOptValue.length() > 0) {
-            if (part::IsStringBoolPositive(sOptValue)) {
+            if (vp::IsStringBoolPositive(sOptValue)) {
                 sea.nFlags |= EAF_ACTIVE;
             } else {
                 sea.nFlags &= ~EAF_ACTIVE;
@@ -1031,7 +1031,7 @@ static UniValue extkey(const JSONRPCRequest &request)
             if (sVar == "N") {
                 nTimeStartScan = 0;
             } else
-            if (part::IsStrOnlyDigits(sVar)) {
+            if (vp::IsStrOnlyDigits(sVar)) {
                 // Setting timestamp directly
                 if (sVar.length() && !ParseInt64(sVar, &nTimeStartScan)) {
                     throw JSONRPCError(RPC_INVALID_PARAMETER, "Import Account failed - Parse time error.");
@@ -1643,8 +1643,8 @@ static UniValue extkeyaltversion(const JSONRPCRequest &request)
         throw std::runtime_error(
             RPCHelpMan{"extkeyaltversion",
                 "\nReturns the provided ext_key encoded with alternate version bytes.\n"
-                "If the provided ext_key has a Bitcoin prefix the output will be encoded with a Particl prefix.\n"
-                "If the provided ext_key has a Particl prefix the output will be encoded with a Bitcoin prefix.\n",
+                "If the provided ext_key has a Bitcoin prefix the output will be encoded with a Vpub prefix.\n"
+                "If the provided ext_key has a Vpub prefix the output will be encoded with a Bitcoin prefix.\n",
                 {
                     {"ext_key", RPCArg::Type::STR, RPCArg::Optional::NO, ""},
                 },
@@ -1690,7 +1690,7 @@ static UniValue getnewextaddress(const JSONRPCRequest &request)
     if (request.fHelp || request.params.size() > 4)
         throw std::runtime_error(
             RPCHelpMan{"getnewextaddress",
-                "\nReturns a new Particl ext address for receiving payments." +
+                "\nReturns a new Vpub ext address for receiving payments." +
                 HelpRequiringPassphrase(pwallet) + "\n",
                 {
                     {"label", RPCArg::Type::STR, /* default */ "", "If specified the key is added to the address book."},
@@ -1757,7 +1757,7 @@ static UniValue getnewstealthaddress(const JSONRPCRequest &request)
     if (request.fHelp || request.params.size() > 5)
         throw std::runtime_error(
             RPCHelpMan{"getnewstealthaddress",
-                "\nReturns a new Particl stealth address for receiving payments." +
+                "\nReturns a new Vpub stealth address for receiving payments." +
                 HelpRequiringPassphrase(pwallet) + "\n",
                 {
                     {"label", RPCArg::Type::STR, /* default */ "", "If specified the key is added to the address book."},
@@ -3186,13 +3186,13 @@ static UniValue filtertransactions(const JSONRPCRequest &request)
         }
 
         if (options["from"].isStr()) {
-            timeFrom = part::strToEpoch(options["from"].get_str().c_str());
+            timeFrom = vp::strToEpoch(options["from"].get_str().c_str());
         } else
         if (options["from"].isNum()) {
             timeFrom = options["from"].get_int64();
         }
         if (options["to"].isStr()) {
-            timeTo = part::strToEpoch(options["to"].get_str().c_str(), true);
+            timeTo = vp::strToEpoch(options["to"].get_str().c_str(), true);
         } else
         if (options["to"].isNum()) {
             timeTo = options["to"].get_int64();
@@ -3501,7 +3501,7 @@ static UniValue filteraddresses(const JSONRPCRequest &request)
                 continue;
             }
             if (nMatchMode) {
-                if (!part::stringsMatchI(it->second.name, sMatch, nMatchMode-1)) {
+                if (!vp::stringsMatchI(it->second.name, sMatch, nMatchMode-1)) {
                     continue;
                 }
             }
@@ -3606,7 +3606,7 @@ static UniValue manageaddressbook(const JSONRPCRequest &request)
     CBitcoinAddress address(sAddress);
 
     if (!address.IsValid()) {
-        throw JSONRPCError(RPC_INVALID_PARAMETER, _("Invalid Particl address."));
+        throw JSONRPCError(RPC_INVALID_PARAMETER, _("Invalid Vpub address."));
     }
 
     LOCK(pwallet->cs_wallet);
@@ -4071,7 +4071,7 @@ static UniValue listunspentanon(const JSONRPCRequest &request)
             const UniValue& input = inputs[idx];
             CBitcoinAddress address(input.get_str());
             if (!address.IsValidStealthAddress())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Particl stealth address: ")+input.get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Vpub stealth address: ")+input.get_str());
             if (setAddress.count(address))
                 throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ")+input.get_str());
            setAddress.insert(address);
@@ -4312,7 +4312,7 @@ static UniValue listunspentblind(const JSONRPCRequest &request)
             const UniValue& input = inputs[idx];
             CBitcoinAddress address(input.get_str());
             if (!address.IsValidStealthAddress())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Particl stealth address: ")+input.get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Vpub stealth address: ")+input.get_str());
             if (setAddress.count(address))
                 throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ")+input.get_str());
            setAddress.insert(address);
@@ -4506,11 +4506,11 @@ static UniValue SendToInner(const JSONRPCRequest &request, OutputTypes typeIn, O
 
             if (typeOut == OUTPUT_RINGCT
                 && !address.IsValidStealthAddress()) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Particl stealth address");
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Vpub stealth address");
             }
 
             if (!obj.exists("script") && !address.IsValid()) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Particl address");
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Vpub address");
             }
 
             if (address.getVchVersion() == Params().Bech32Prefix(CChainParams::STAKE_ONLY_PKADDR)) {
@@ -4578,11 +4578,11 @@ static UniValue SendToInner(const JSONRPCRequest &request, OutputTypes typeIn, O
 
         if (typeOut == OUTPUT_RINGCT
             && !address.IsValidStealthAddress()) {
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Particl stealth address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Vpub stealth address");
         }
 
         if (!address.IsValid()) {
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Particl address");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Vpub address");
         }
 
         CAmount nAmount = AmountFromValue(request.params[1]);
@@ -4640,7 +4640,7 @@ static UniValue SendToInner(const JSONRPCRequest &request, OutputTypes typeIn, O
     size_t nv = nCommentOfs;
     if (request.params.size() > nv && !request.params[nv].isNull()) {
         std::string s = request.params[nv].get_str();
-        part::TrimQuotes(s);
+        vp::TrimQuotes(s);
         if (!s.empty()) {
             std::vector<uint8_t> v(s.begin(), s.end());
             wtx.mapValue["comment"] = s;
@@ -4650,7 +4650,7 @@ static UniValue SendToInner(const JSONRPCRequest &request, OutputTypes typeIn, O
     nv++;
     if (request.params.size() > nv && !request.params[nv].isNull()) {
         std::string s = request.params[nv].get_str();
-        part::TrimQuotes(s);
+        vp::TrimQuotes(s);
         if (!s.empty()) {
             std::vector<uint8_t> v(s.begin(), s.end());
             wtx.mapValue["to"] = s;
@@ -4870,7 +4870,7 @@ static const char *TypeToWord(OutputTypes type)
     switch (type)
     {
         case OUTPUT_STANDARD:
-            return "part";
+            return "vp";
         case OUTPUT_CT:
             return "blind";
         case OUTPUT_RINGCT:
@@ -4883,7 +4883,7 @@ static const char *TypeToWord(OutputTypes type)
 
 static OutputTypes WordToType(std::string &s)
 {
-    if (s == "part")
+    if (s == "vp")
         return OUTPUT_STANDARD;
     if (s == "blind")
         return OUTPUT_CT;
@@ -4905,8 +4905,8 @@ static std::string SendHelp(CHDWallet *pwallet, OutputTypes typeIn, OutputTypes 
 
     rv += "\nSend an amount of ";
     rv += typeIn == OUTPUT_RINGCT ? "anon" : typeIn == OUTPUT_CT ? "blinded" : "";
-    rv += std::string(" part in a") + (typeOut == OUTPUT_RINGCT || typeOut == OUTPUT_CT ? " blinded" : "") + " payment to a given address"
-        + (typeOut == OUTPUT_CT ? " in anon part": "") + ".\n";
+    rv += std::string(" vp in a") + (typeOut == OUTPUT_RINGCT || typeOut == OUTPUT_CT ? " blinded" : "") + " payment to a given address"
+        + (typeOut == OUTPUT_CT ? " in anon vp": "") + ".\n";
 
     rv += HelpRequiringPassphrase(pwallet);
 
@@ -4914,9 +4914,9 @@ static std::string SendHelp(CHDWallet *pwallet, OutputTypes typeIn, OutputTypes 
             "1. \"address\"     (string, required) The particl address to send to.\n"
             "2. \"amount\"      (numeric or string, required) The amount in " + CURRENCY_UNIT + " to send. eg 0.1\n"
             "3. \"comment\"     (string, optional) A comment used to store what the transaction is for. \n"
-            "                            This is not part of the transaction, just kept in your wallet.\n"
+            "                            This is not vp of the transaction, just kept in your wallet.\n"
             "4. \"comment_to\"  (string, optional) A comment to store the name of the person or organization \n"
-            "                            to which you're sending the transaction. This is not part of the \n"
+            "                            to which you're sending the transaction. This is not vp of the \n"
             "                            transaction, just kept in your wallet.\n"
             "5. subtractfeefromamount  (boolean, optional, default=false) The fee will be deducted from the amount being sent.\n"
             "                            The recipient will receive less " + CURRENCY_UNIT + " than you enter in the amount field.\n"
@@ -5044,11 +5044,11 @@ UniValue sendtypeto(const JSONRPCRequest &request)
     if (request.fHelp || request.params.size() < 3 || request.params.size() > 9)
         throw std::runtime_error(
             RPCHelpMan{"sendtypeto",
-                "\nSend part to multiple outputs." +
+                "\nSend vp to multiple outputs." +
                 HelpRequiringPassphrase(pwallet) + "\n",
                 {
-                    {"typein", RPCArg::Type::STR, RPCArg::Optional::NO, "part/blind/anon"},
-                    {"typeout", RPCArg::Type::STR, RPCArg::Optional::NO, "part/blind/anon"},
+                    {"typein", RPCArg::Type::STR, RPCArg::Optional::NO, "vp/blind/anon"},
+                    {"typeout", RPCArg::Type::STR, RPCArg::Optional::NO, "vp/blind/anon"},
                     {"outputs", RPCArg::Type::ARR, RPCArg::Optional::NO, "A json array of json objects",
                         {
                             {"", RPCArg::Type::OBJ, RPCArg::Optional::NO, "",
@@ -5064,9 +5064,9 @@ UniValue sendtypeto(const JSONRPCRequest &request)
                         },
                     },
                     {"comment", RPCArg::Type::STR, /* default */ "", "A comment used to store what the transaction is for.\n"
-            "                             This is not part of the transaction, just kept in your wallet."},
+            "                             This is not vp of the transaction, just kept in your wallet."},
                     {"comment_to", RPCArg::Type::STR, /* default */ "", "A comment to store the name of the person or organization\n"
-            "                             to which you're sending the transaction. This is not part of the \n"
+            "                             to which you're sending the transaction. This is not vp of the \n"
             "                             transaction, just kept in your wallet."},
                     {"ringsize", RPCArg::Type::NUM, /* default */ strprintf("%d", DEFAULT_RING_SIZE), "Only applies when typein is anon."},
                     {"inputs_per_sig", RPCArg::Type::NUM, /* default */ strprintf("%d", DEFAULT_INPUTS_PER_SIG), "Only applies when typein is anon."},
@@ -5099,7 +5099,7 @@ UniValue sendtypeto(const JSONRPCRequest &request)
             "\"txid\"              (string) The transaction id.\n"
                 },
                 RPCExamples{
-            HelpExampleCli("sendtypeto", "anon part \"[{\\\"address\\\":\\\"PbpVcjgYatnkKgveaeqhkeQBFwjqR7jKBR\\\",\\\"amount\\\":0.1}]\"")
+            HelpExampleCli("sendtypeto", "anon vp \"[{\\\"address\\\":\\\"PbpVcjgYatnkKgveaeqhkeQBFwjqR7jKBR\\\",\\\"amount\\\":0.1}]\"")
                 },
             }.ToString());
 

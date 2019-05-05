@@ -214,7 +214,7 @@ $(1): | $($(1)_cached_checksum)
 endef
 
 # These functions create the build targets for each package. They must be
-# broken down into small steps so that each part is done for all packages
+# broken down into small steps so that each vp is done for all packages
 # before moving on to the next step. Otherwise, a package's info
 # (build-id for example) would only be available to another package if it
 # happened to be computed already.

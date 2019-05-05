@@ -109,7 +109,7 @@ EXPECTED_HOLDER_NAMES = [
     "The PPCoin developers\n",
     "The BlackCoin developers\n",
     "The ShadowCoin developers\n",
-    "The Particl Core developers\n",
+    "The Vpub Core developers\n",
 ]
 
 DOMINANT_STYLE_COMPILED = {}
@@ -369,7 +369,7 @@ def create_updated_copyright_line(line, last_git_change_year):
     copyright_splitter = 'Copyright (c) '
     copyright_split = line.split(copyright_splitter)
     # Preserve characters on line that are ahead of the start of the copyright
-    # notice - they are part of the comment block and vary from file-to-file.
+    # notice - they are vp of the comment block and vary from file-to-file.
     before_copyright = copyright_split[0]
     after_copyright = copyright_split[1]
 

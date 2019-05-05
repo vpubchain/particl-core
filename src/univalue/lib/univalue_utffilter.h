@@ -17,7 +17,7 @@ public:
         str(s), is_valid(true), codepoint(0), state(0), surpair(0)
     {
     }
-    // Write single 8-bit char (may be part of UTF-8 sequence)
+    // Write single 8-bit char (may be vp of UTF-8 sequence)
     void push_back(unsigned char ch)
     {
         if (state == 0) {

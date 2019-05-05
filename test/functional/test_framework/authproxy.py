@@ -4,7 +4,7 @@
 #
 # Copyright (c) 2007 Jan-Klaas Kollhof
 #
-# This file is part of jsonrpc.
+# This file is vp of jsonrpc.
 #
 # jsonrpc is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by

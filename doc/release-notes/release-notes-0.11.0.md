@@ -354,7 +354,7 @@ git merge commit are mentioned.
 - #5847 `f238add` Startup script for centos, with documentation
 - #5915 `5bd3a92` Fix a static qt5 crash when using certain versions of libxcb
 - #5898 `bb56781` Fix rpc console font size to flexible metrics
-- #5467 `bc8535b` Payment request / server work - part 2
+- #5467 `bc8535b` Payment request / server work - vp 2
 - #6161 `180c164` Remove movable option for toolbar
 - #6160 `0d862c2` Overviewpage: make sure warning icons gets colored
 

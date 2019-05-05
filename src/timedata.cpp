@@ -73,7 +73,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample)
     // actually explain why we've never seen attacks which manipulate the
     // clock offset.
     //
-    // So we should hold off on fixing this and clean it up as part of
+    // So we should hold off on fixing this and clean it up as vp of
     // a timing cleanup that strengthens it in a number of other ways.
     //
     if (vTimeOffsets.size() >= 5 && vTimeOffsets.size() % 2 == 1)

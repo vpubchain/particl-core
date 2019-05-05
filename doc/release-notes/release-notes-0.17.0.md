@@ -519,7 +519,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #12336 `3843780` Remove deprecated rpc options (jnewbery)
 - #12193 `5dc00f6` Consistently use UniValue.pushKV instead of push_back(Pair()) (karel-3d) (MarcoFalke)
 - #12409 `0cc45ed` Reject deprecated reserveChangeKey in fundrawtransaction (MarcoFalke)
-- #10583 `8a98dfe` Split part of validateaddress into getaddressinfo (achow101)
+- #10583 `8a98dfe` Split vp of validateaddress into getaddressinfo (achow101)
 - #10579 `ffc6e48` Split signrawtransaction into wallet and non-wallet RPC command (achow101)
 - #12494 `e4ffcac` Declare CMutableTransaction a struct in rawtransaction.h (Empact)
 - #12503 `0e26591` createmultisig no longer takes addresses (instagibbs)

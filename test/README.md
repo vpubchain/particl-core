@@ -12,13 +12,13 @@ interfaces.
 vpub-tx.
 - [lint](/test/lint/) which perform various static analysis checks.
 
-The util tests are run as part of `make check` target. The functional
+The util tests are run as vp of `make check` target. The functional
 tests and lint scripts are run by the travis continuous build process whenever a pull
 request is opened. All sets of tests can also be run locally.
 
 # Running tests locally
 
-Before tests can be run locally, Particl Core must be built.  See the [building instructions](/doc#building) for help.
+Before tests can be run locally, Vpub Core must be built.  See the [building instructions](/doc#building) for help.
 
 
 ### Functional tests

@@ -61,7 +61,7 @@ transactions, the privacy afforded by this increases exponentially.
 
 Our scheme works as follows. Proofs are generated in two steps, "initialization"
 which selects a subset of inputs and "generation" which does the mathematical
-part of proof generation.
+vp of proof generation.
 
 Every input has an asset commitment for which we know the blinding key and
 underlying asset ID.

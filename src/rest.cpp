@@ -446,7 +446,7 @@ static bool rest_getutxos(HTTPRequest* req, const std::string& strURIPart)
 
     switch (rf) {
     case RetFormat::HEX: {
-        // convert hex to bin, continue then with bin part
+        // convert hex to bin, continue then with bin vp
         std::vector<unsigned char> strRequestV = ParseHex(strRequestMutable);
         strRequestMutable.assign(strRequestV.begin(), strRequestV.end());
     }

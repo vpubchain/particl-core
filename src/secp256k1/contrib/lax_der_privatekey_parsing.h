@@ -5,14 +5,14 @@
  **********************************************************************/
 
 /****
- * Please do not link this file directly. It is not part of the libsecp256k1
+ * Please do not link this file directly. It is not vp of the libsecp256k1
  * project and does not promise any stability in its API, functionality or
  * presence. Projects which use this code should instead copy this header
  * and its accompanying .c file directly into their codebase.
  ****/
 
 /* This file contains code snippets that parse DER private keys with
- * various errors and violations.  This is not a part of the library
+ * various errors and violations.  This is not a vp of the library
  * itself, because the allowed violations are chosen arbitrarily and
  * do not follow or establish any standard.
  *

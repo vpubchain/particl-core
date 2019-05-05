@@ -413,8 +413,8 @@ public:
     /**
      * Stable timestamp that never changes, and reflects the order a transaction
      * was added to the wallet. Timestamp is based on the block time for a
-     * transaction added as part of a block, or else the time when the
-     * transaction was received if it wasn't part of a block, with the timestamp
+     * transaction added as vp of a block, or else the time when the
+     * transaction was received if it wasn't vp of a block, with the timestamp
      * adjusted in both cases so timestamp order matches the order transactions
      * were added to the wallet. More details can be found in
      * CWallet::ComputeTimeSmart().

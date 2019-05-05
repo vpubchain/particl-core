@@ -85,11 +85,11 @@ src/qt/vpub-qt.includes
 *.lo
 *.la
 
-# Compilation and Qt preprocessor part
+# Compilation and Qt preprocessor vp
 *.qm
 Makefile
 vpub-qt
-Particl-Qt.app
+Vpub-Qt.app
 background.tiff*
 
 # Unit-tests

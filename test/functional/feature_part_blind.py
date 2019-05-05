@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017-2018 The Particl Core developers
+# Copyright (c) 2017-2018 The Vpub Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -168,7 +168,7 @@ class BlindTest(ParticlTestFramework):
         assert(len(nodes[1].listunspentblind(minconf=0)) == len(unspent))
 
         outputs = [{'address': sxAddrTo2_3, 'amount': 2.691068, 'subfee': True},]
-        ro = nodes[1].sendtypeto('blind', 'part', outputs, 'comment_to', 'comment_from', 4, 64, True)
+        ro = nodes[1].sendtypeto('blind', 'vp', outputs, 'comment_to', 'comment_from', 4, 64, True)
         feePerKB = (1000.0 / ro['bytes']) * float(ro['fee'])
         assert(feePerKB > 0.001 and feePerKB < 0.004)
 
@@ -176,7 +176,7 @@ class BlindTest(ParticlTestFramework):
         feePerKB = (1000.0 / ro['bytes']) * float(ro['fee'])
         assert(feePerKB > 0.001 and feePerKB < 0.004)
 
-        ro = nodes[1].sendtypeto('blind', 'part', outputs)
+        ro = nodes[1].sendtypeto('blind', 'vp', outputs)
 
         try:
             ro = nodes[1].sendtypeto('blind', 'blind', outputs)
@@ -188,7 +188,7 @@ class BlindTest(ParticlTestFramework):
         addrPlain = nodes[0].getnewaddress()
         addrLong = nodes[0].getnewaddress('', False, False, True)
         outputs = [{'address': addrPlain, 'amount': 1}, {'address': addrLong, 'amount': 1}]
-        ro = nodes[0].sendtypeto('part', 'blind', outputs)
+        ro = nodes[0].sendtypeto('vp', 'blind', outputs)
 
 
 if __name__ == '__main__':

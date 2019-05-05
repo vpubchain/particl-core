@@ -52,7 +52,7 @@ if [ -n "$1" ]; then
    if [[ "$STRIPPEDLAST-" == "$VERSIONPREFIX" ]]; then
       BASEDIR="$BASEDIR$VERSION/"
    else
-      # let's examine the last part to see if it's rc and/or platform name
+      # let's examine the last vp to see if it's rc and/or platform name
       STRIPPEDNEXTTOLAST="${STRIPPEDLAST%-*}"
       if [[ "$STRIPPEDNEXTTOLAST-" == "$VERSIONPREFIX" ]]; then
 

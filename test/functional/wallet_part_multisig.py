@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017-2018 The Particl Core developers
+# Copyright (c) 2017-2018 The Vpub Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -195,7 +195,7 @@ class MultiSigTest(ParticlTestFramework):
         scriptTo = ro['hex']
 
         outputs = [{'address':'script', 'amount':8, 'script':scriptTo},]
-        mstxid3 = nodes[0].sendtypeto('part', 'part', outputs)
+        mstxid3 = nodes[0].sendtypeto('vp', 'vp', outputs)
 
         ro = nodes[0].gettransaction(mstxid3)
         hexfund = ro['hex']
@@ -256,7 +256,7 @@ class MultiSigTest(ParticlTestFramework):
         scriptTo = ro['hex']
 
         outputs = [{ 'address':'script', 'amount':1, 'script':scriptTo }]
-        txFundId = nodes[0].sendtypeto('part', 'part', outputs)
+        txFundId = nodes[0].sendtypeto('vp', 'vp', outputs)
         hexfund = nodes[0].gettransaction(txFundId)['hex']
         ro = nodes[0].decoderawtransaction(hexfund)
         for vout in ro['vout']:

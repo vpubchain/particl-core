@@ -341,7 +341,7 @@ Network
   if you have unused incoming connection slots.  If your slots fill up,
   a misbehaving node will be disconnected to make room for nodes without
   a history of problems (unless the misbehaving node helps your node in
-  some other way, such as by connecting to a part of the Internet from
+  some other way, such as by connecting to a vp of the Internet from
   which you don't have many other peers).  Previously, Bitcoin Core
   banned the IP addresses of misbehaving peers for a period of time
   (default of 1 day); this was easily circumvented by attackers with

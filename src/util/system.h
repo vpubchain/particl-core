@@ -134,7 +134,7 @@ inline bool IsSwitchChar(char c)
 #endif
 }
 
-namespace part
+namespace vp
 {
     void *memrchr(const void *s, int c, size_t n);
 

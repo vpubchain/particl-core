@@ -18,7 +18,7 @@
  * early, trading two points (L, R) for two scalars, which reduces verification
  * and prover cost.
  *
- * For the most part, all comments assume this value is at 4.
+ * For the most vp, all comments assume this value is at 4.
  */
 #define IP_AB_SCALARS	4
 

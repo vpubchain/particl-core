@@ -76,7 +76,7 @@ Add the new sstable to the young (level-0) level.
 
 When the size of level L exceeds its limit, we compact it in a background
 thread. The compaction picks a file from level L and all overlapping files from
-the next level L+1. Note that if a level-L file overlaps only part of a
+the next level L+1. Note that if a level-L file overlaps only vp of a
 level-(L+1) file, the entire file at level-(L+1) is used as an input to the
 compaction and will be discarded after the compaction.  Aside: because level-0
 is special (files in it may overlap each other), we treat compactions from

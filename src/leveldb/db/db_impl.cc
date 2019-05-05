@@ -759,7 +759,7 @@ void DBImpl::BackgroundCompaction() {
       m->done = true;
     }
     if (!m->done) {
-      // We only compacted part of the requested range.  Update *m
+      // We only compacted vp of the requested range.  Update *m
       // to the range that is left to be compacted.
       m->tmp_storage = manual_end;
       m->begin = &m->tmp_storage;

@@ -96,7 +96,7 @@ class Version {
       std::vector<FileMetaData*>* inputs);
 
   // Returns true iff some file in the specified level overlaps
-  // some part of [*smallest_user_key,*largest_user_key].
+  // some vp of [*smallest_user_key,*largest_user_key].
   // smallest_user_key==NULL represents a key smaller than all keys in the DB.
   // largest_user_key==NULL represents a key largest than all keys in the DB.
   bool OverlapInLevel(int level,

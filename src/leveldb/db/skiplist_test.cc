@@ -131,7 +131,7 @@ TEST(SkipTest, InsertAndLookup) {
 // constructed, but we should never miss any values that were present
 // at iterator construction time.
 //
-// We generate multi-part keys:
+// We generate multi-vp keys:
 //     <key,gen,hash>
 // where:
 //     key is in range [0..K-1]

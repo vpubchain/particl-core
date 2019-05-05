@@ -111,7 +111,7 @@ enum jtokentype getJsonToken(std::string& tokenVal, unsigned int& consumed,
     case '7':
     case '8':
     case '9': {
-        // part 1: int
+        // vp 1: int
         std::string numStr;
 
         const char *first = raw;
@@ -133,7 +133,7 @@ enum jtokentype getJsonToken(std::string& tokenVal, unsigned int& consumed,
             raw++;
         }
 
-        // part 2: frac
+        // vp 2: frac
         if (raw < end && *raw == '.') {
             numStr += *raw;                   // copy .
             raw++;
@@ -146,7 +146,7 @@ enum jtokentype getJsonToken(std::string& tokenVal, unsigned int& consumed,
             }
         }
 
-        // part 3: exp
+        // vp 3: exp
         if (raw < end && (*raw == 'e' || *raw == 'E')) {
             numStr += *raw;                   // copy E
             raw++;

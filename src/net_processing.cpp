@@ -645,7 +645,7 @@ static void FindNextBlocksToDownload(NodeId nodeid, unsigned int count, std::vec
         // Iterate over those blocks in vToFetch (in forward direction), adding the ones that
         // are not yet downloaded and not in flight to vBlocks. In the meantime, update
         // pindexLastCommonBlock as long as all ancestors are already downloaded, or if it's
-        // already part of our chain (and therefore don't need it even if pruned).
+        // already vp of our chain (and therefore don't need it even if pruned).
         for (const CBlockIndex* pindex : vToFetch) {
             if (pindex->nFlags & BLOCK_DELAYED) {
                 // Already have block in delayed queue
@@ -2174,7 +2174,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
             // We only bother storing full nodes, though this may include
             // things which we would not make an outbound connection to, in
-            // part because we may make feeler connections to them.
+            // vp because we may make feeler connections to them.
             if (!MayHaveUsefulAddressDB(addr.nServices) && !HasAllDesirableServiceFlags(addr.nServices))
                 continue;
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The ShadowCoin developers
-// Copyright (c) 2017-2018 The Particl Core developers
+// Copyright (c) 2017-2018 The Vpub Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -74,9 +74,9 @@ const unsigned int SMSG_TIME_LEEWAY    = 24;
 const unsigned int SMSG_TIME_IGNORE    = 90;                // seconds a peer is ignored for if they fail to deliver messages for a smsgWant
 
 
-const unsigned int SMSG_MAX_MSG_BYTES  = 24000;             // the user input part
-const unsigned int SMSG_MAX_AMSG_BYTES = 512;               // the user input part (ANON)
-const unsigned int SMSG_MAX_MSG_BYTES_PAID = 512 * 1024;    // the user input part (Paid)
+const unsigned int SMSG_MAX_MSG_BYTES  = 24000;             // the user input vp
+const unsigned int SMSG_MAX_AMSG_BYTES = 512;               // the user input vp (ANON)
+const unsigned int SMSG_MAX_MSG_BYTES_PAID = 512 * 1024;    // the user input vp (Paid)
 
 // Max size of payload worst case compression
 const unsigned int SMSG_MAX_MSG_WORST = LZ4_COMPRESSBOUND(SMSG_MAX_MSG_BYTES+SMSG_PL_HDR_LEN);

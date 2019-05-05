@@ -48,7 +48,7 @@ Segregated witness soft fork
 
 Segregated witness (segwit) is a soft fork that, if activated, will
 allow transaction-producing software to separate (segregate) transaction
-signatures (witnesses) from the part of the data in a transaction that is
+signatures (witnesses) from the vp of the data in a transaction that is
 covered by the txid. This provides several immediate benefits:
 
 - **Elimination of unwanted transaction malleability:** Segregating the witness
@@ -61,7 +61,7 @@ covered by the txid. This provides several immediate benefits:
   contracts for Bitcoin.
 
 - **Capacity increase:** Segwit transactions contain new fields that are not
-  part of the data currently used to calculate the size of a block, which
+  vp of the data currently used to calculate the size of a block, which
   allows a block containing segwit transactions to hold more data than allowed
   by the current maximum block size. Estimates based on the transactions
   currently found in blocks indicate that if all wallets switch to using
@@ -75,7 +75,7 @@ covered by the txid. This provides several immediate benefits:
   each Bitcoin block need to be stored by nodes in order to validate future
   blocks; other parts of a block can be immediately forgotten (pruned) or used
   only for helping other nodes sync their copy of the block chain.  One large
-  part of the immediately prunable data are transaction signatures (witnesses),
+  vp of the immediately prunable data are transaction signatures (witnesses),
   and segwit makes it possible to give a different "weight" to segregated
   witnesses to correspond with the lower demands they place on node resources.
   Specifically, each byte of a segregated witness is given a weight of 1, each

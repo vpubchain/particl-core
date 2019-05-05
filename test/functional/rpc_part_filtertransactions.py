@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017-2018 The Particl Core developers
+# Copyright (c) 2017-2018 The Vpub Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -72,8 +72,8 @@ class FilterTransactionsTest(ParticlTestFramework):
 
         # several outputs
         nodes[0].sendtypeto(
-            'part',               # type in
-            'part',               # type out
+            'vp',               # type in
+            'vp',               # type out
             [                     # outputs
                 {
                     'address':    selfAddress,
@@ -97,8 +97,8 @@ class FilterTransactionsTest(ParticlTestFramework):
             }
         )
         nodes[0].sendtypeto(
-            'part',              # type in
-            'part',              # type out
+            'vp',              # type in
+            'vp',              # type out
             [                    # outputs
                 {
                     'address':   'script',
@@ -110,8 +110,8 @@ class FilterTransactionsTest(ParticlTestFramework):
         )
         txid = nodes[0].sendtoaddress(selfSpending, 50)
         nodes[0].sendtypeto(
-            'part',              # type in
-            'part',              # type out
+            'vp',              # type in
+            'vp',              # type out
             [                    # outputs
                 {
                     'address':   targetAddress,

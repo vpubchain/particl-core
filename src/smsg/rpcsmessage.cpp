@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The ShadowCoin developers
-// Copyright (c) 2017-2019 The Particl Core developers
+// Copyright (c) 2017-2019 The Vpub Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -890,9 +890,9 @@ static UniValue smsginbox(const JSONRPCRequest &request)
                     std::string sAddrTo = CBitcoinAddress(smsgStored.addrTo).ToString();
                     std::string sText = std::string((char*)msg.vchMessage.data());
                     if (filter.size() > 0
-                        && !(part::stringsMatchI(msg.sFromAddress, filter, 3) ||
-                            part::stringsMatchI(sAddrTo, filter, 3) ||
-                            part::stringsMatchI(sText, filter, 3))) {
+                        && !(vp::stringsMatchI(msg.sFromAddress, filter, 3) ||
+                            vp::stringsMatchI(sAddrTo, filter, 3) ||
+                            vp::stringsMatchI(sText, filter, 3))) {
                         continue;
                     }
 
@@ -1046,9 +1046,9 @@ static UniValue smsgoutbox(const JSONRPCRequest &request)
                     std::string sAddrTo = CBitcoinAddress(smsgStored.addrTo).ToString();
                     std::string sText = std::string((char*)msg.vchMessage.data());
                     if (filter.size() > 0
-                        && !(part::stringsMatchI(msg.sFromAddress, filter, 3) ||
-                            part::stringsMatchI(sAddrTo, filter, 3) ||
-                            part::stringsMatchI(sText, filter, 3))) {
+                        && !(vp::stringsMatchI(msg.sFromAddress, filter, 3) ||
+                            vp::stringsMatchI(sAddrTo, filter, 3) ||
+                            vp::stringsMatchI(sText, filter, 3))) {
                         continue;
                     }
 
@@ -1151,7 +1151,7 @@ static UniValue smsgbuckets(const JSONRPCRequest &request)
                 objM.pushKV("no. messages", strprintf("%u", tokenSet.size()));
                 objM.pushKV("active messages", strprintf("%u", nActiveMessages));
                 objM.pushKV("hash", sHash);
-                objM.pushKV("last changed", part::GetTimeString(it->second.timeChanged, cbuf, sizeof(cbuf)));
+                objM.pushKV("last changed", vp::GetTimeString(it->second.timeChanged, cbuf, sizeof(cbuf)));
 
                 boost::filesystem::path fullPath = GetDataDir() / "smsgstore" / sFile;
                 if (!boost::filesystem::exists(fullPath)) {
@@ -1166,7 +1166,7 @@ static UniValue smsgbuckets(const JSONRPCRequest &request)
                         uint64_t nFBytes = 0;
                         nFBytes = boost::filesystem::file_size(fullPath);
                         nBytes += nFBytes;
-                        objM.pushKV("file size", part::BytesReadable(nFBytes));
+                        objM.pushKV("file size", vp::BytesReadable(nFBytes));
                     } catch (const boost::filesystem::filesystem_error& ex) {
                         objM.pushKV("file size, error", ex.what());
                     }
@@ -1180,7 +1180,7 @@ static UniValue smsgbuckets(const JSONRPCRequest &request)
         objM.pushKV("numbuckets", (int)nBuckets);
         objM.pushKV("numpurged", (int)smsgModule.setPurged.size());
         objM.pushKV("messages", (int)nMessages);
-        objM.pushKV("size", part::BytesReadable(nBytes));
+        objM.pushKV("size", vp::BytesReadable(nBytes));
         result.pushKV("buckets", arrBuckets);
         result.pushKV("total", objM);
 
@@ -1296,7 +1296,7 @@ static UniValue smsgview(const JSONRPCRequest &request)
                 {
                     LOCK(smsgModule.pwallet->cs_wallet);
                     for (itl = smsgModule.pwallet->mapAddressBook.begin(); itl != smsgModule.pwallet->mapAddressBook.end(); ++itl) {
-                        if (part::stringsMatchI(itl->second.name, sTemp, matchType)) {
+                        if (vp::stringsMatchI(itl->second.name, sTemp, matchType)) {
                             CBitcoinAddress checkValid(itl->first);
                             if (checkValid.IsValid()) {
                                 CKeyID ki;
@@ -1323,7 +1323,7 @@ static UniValue smsgview(const JSONRPCRequest &request)
             }
             i++;
             sTemp = request.params[i].get_str();
-            tFrom = part::strToEpoch(sTemp.c_str());
+            tFrom = vp::strToEpoch(sTemp.c_str());
             if (tFrom < 0) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "from format error: " + std::string(strerror(errno)));
             }
@@ -1334,7 +1334,7 @@ static UniValue smsgview(const JSONRPCRequest &request)
             }
             i++;
             sTemp = request.params[i].get_str();
-            tTo = part::strToEpoch(sTemp.c_str());
+            tTo = vp::strToEpoch(sTemp.c_str());
             if (tTo < 0) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, "to format error: " + std::string(strerror(errno)));
             }
@@ -1496,10 +1496,10 @@ static UniValue smsgview(const JSONRPCRequest &request)
 
     result.pushKV("result", strprintf("Displayed %u messages.", nMessages));
     if (tFrom > 0) {
-        result.pushKV("from", part::GetTimeString(tFrom, cbuf, sizeof(cbuf)));
+        result.pushKV("from", vp::GetTimeString(tFrom, cbuf, sizeof(cbuf)));
     }
     if (tTo > 0) {
-        result.pushKV("to", part::GetTimeString(tTo, cbuf, sizeof(cbuf)));
+        result.pushKV("to", vp::GetTimeString(tTo, cbuf, sizeof(cbuf)));
     }
 #else
     UniValue result(UniValue::VOBJ);

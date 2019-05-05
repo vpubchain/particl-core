@@ -123,8 +123,8 @@ class FrameworkInfo(object):
             parts = path.split("/")
             i = 0
             # Search for the .framework directory
-            for part in parts:
-                if part.endswith(".framework"):
+            for vp in parts:
+                if vp.endswith(".framework"):
                     break
                 i += 1
             if i == len(parts):
@@ -154,7 +154,7 @@ class FrameworkInfo(object):
 class ApplicationBundleInfo(object):
     def __init__(self, path):
         self.path = path
-        appName = "Particl-Qt"
+        appName = "Vpub-Qt"
         self.binaryPath = os.path.join(path, "Contents", "MacOS", appName)
         if not os.path.exists(self.binaryPath):
             raise RuntimeError("Could not find bundle binary for " + path)
@@ -596,7 +596,7 @@ else:
 
 # ------------------------------------------------
 
-target = os.path.join("dist", "Particl-Qt.app")
+target = os.path.join("dist", "Vpub-Qt.app")
 
 if verbose >= 2:
     print("+ Copying source bundle +")

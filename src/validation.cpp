@@ -57,7 +57,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "Particl cannot be compiled without assertions."
+# error "Vpub cannot be compiled without assertions."
 #endif
 
 #define MICRO 0.000001
@@ -365,7 +365,7 @@ bool CheckFinalTx(const CTransaction &tx, int flags)
     // nLockTime because when IsFinalTx() is called within
     // CBlock::AcceptBlock(), the height of the block *being*
     // evaluated is what is used. Thus if we want to know if a
-    // transaction can be part of the *next* block, we need to call
+    // transaction can be vp of the *next* block, we need to call
     // IsFinalTx() with one more than chainActive.Height().
     const int nBlockHeight = chainActive.Height() + 1;
 
@@ -414,7 +414,7 @@ bool CheckSequenceLocks(const CTxMemPool& pool, const CTransaction& tx, int flag
     // height based locks because when SequenceLocks() is called within
     // ConnectBlock(), the height of the block *being*
     // evaluated is what is used.
-    // Thus if we want to know if a transaction can be part of the
+    // Thus if we want to know if a transaction can be vp of the
     // *next* block, we need to use one more than chainActive.Height()
     index.nHeight = tip->nHeight + 1;
 
@@ -1628,7 +1628,7 @@ bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsVi
                 // are clearly committed to by tx' witness hash. This provides
                 // a sanity check that our caching is not introducing consensus
                 // failures through additional data in, eg, the coins being
-                // spent being checked as a part of CScriptCheck.
+                // spent being checked as a vp of CScriptCheck.
                 const CScript& scriptPubKey = coin.out.scriptPubKey;
                 const CAmount amount = coin.out.nValue;
 
@@ -2283,7 +2283,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     bool fIsGenesisBlock = blockHash == chainparams.GetConsensus().hashGenesisBlock;
     // Special case for the genesis block, skipping connection of its transactions
     // (its coinbase is unspendable)
-    if (!fParticlMode  // genesis coinbase is spendable when in Particl mode
+    if (!fParticlMode  // genesis coinbase is spendable when in Vpub mode
         && fIsGenesisBlock) {
         if (!fJustCheck)
             view.SetBestBlock(pindex->GetBlockHash(), pindex->nHeight);
@@ -2298,7 +2298,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
         // A suitable default value is included with the software and updated from time to time.  Because validity
         //  relative to a piece of software is an objective fact these defaults can be easily reviewed.
         // This setting doesn't force the selection of any particular chain but makes validating some faster by
-        //  effectively caching the result of part of the verification.
+        //  effectively caching the result of vp of the verification.
         BlockMap::const_iterator  it = mapBlockIndex.find(hashAssumeValid);
         if (it != mapBlockIndex.end()) {
             if (it->second->GetAncestor(pindex->nHeight) == pindex &&
@@ -2772,7 +2772,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
         }
     } else {
         CAmount blockReward = nFees + GetBlockSubsidy(pindex->nHeight, chainparams.GetConsensus());
-        if (block.vtx[0]->GetValueOut() > blockReward) // Particl coins are imported as coinbase txns
+        if (block.vtx[0]->GetValueOut() > blockReward) // Vpub coins are imported as coinbase txns
             return state.DoS(100,
                              error("ConnectBlock(): coinbase pays too much (actual=%d vs limit=%d)",
                                    block.vtx[0]->GetValueOut(), blockReward),
@@ -3196,7 +3196,7 @@ struct PerBlockConnectTrace {
 };
 /**
  * Used to track blocks whose transactions were applied to the UTXO state as a
- * part of a single ActivateBestChainStep call.
+ * vp of a single ActivateBestChainStep call.
  *
  * This class also tracks transactions that are removed from the mempool as
  * conflicts (per block) and can be used to pass all those transactions

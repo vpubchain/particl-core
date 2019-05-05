@@ -1,7 +1,7 @@
-Contributing to Particl Core
+Contributing to Vpub Core
 ============================
 
-The Particl project operates an open contributor model where anyone is
+The Vpub project operates an open contributor model where anyone is
 welcome to contribute towards development in the form of peer review, testing
 and patches. This document explains the practical process and guidelines for
 contributing.
@@ -17,7 +17,7 @@ release cycle, overall merging, moderation and appointment of maintainers.
 Communication Channels
 ----------------------
 
-Most communication about Particl development happens on [#particl-dev:matrix.org](https://riot.im/app/#/room/#particl-dev:matrix.org), in the Particl Open Development channel on Riot. The easiest way to participate on Riot is
+Most communication about Vpub development happens on [#particl-dev:matrix.org](https://riot.im/app/#/room/#particl-dev:matrix.org), in the Vpub Open Development channel on Riot. The easiest way to participate on Riot is
 with the web client, [riot.im](https://riot.im/app/). Desktop downloads also available.
 
 Discussion about code base improvements happens in GitHub issues and on pull
@@ -109,7 +109,7 @@ At this stage one should expect comments and review from other contributors. You
 can add more commits to your pull request by committing them locally and pushing
 to your fork until you have satisfied all feedback.
 
-Note: Code review is a burdensome but important part of the development process, and as such, certain types of pull requests are rejected. In general, if the **improvements** do not warrant the **review effort** required, the PR has a high chance of being rejected. It is up to the PR author to convince the reviewers that the changes warrant the review effort, and if reviewers are "Concept NAK'ing" the PR, the author may need to present arguments and/or do research backing their suggested changes.
+Note: Code review is a burdensome but important vp of the development process, and as such, certain types of pull requests are rejected. In general, if the **improvements** do not warrant the **review effort** required, the PR has a high chance of being rejected. It is up to the PR author to convince the reviewers that the changes warrant the review effort, and if reviewers are "Concept NAK'ing" the PR, the author may need to present arguments and/or do research backing their suggested changes.
 
 Squashing Commits
 ---------------------------
@@ -162,7 +162,7 @@ in the future, they may be removed by the Repository Maintainer.
 
 ### Refactoring
 
-Refactoring is a necessary part of any software project's evolution. The
+Refactoring is a necessary vp of any software project's evolution. The
 following guidelines cover refactoring pull requests for the project.
 
 There are three categories of refactoring, code only moves, code style fixes,
@@ -186,9 +186,9 @@ workload on reviewing.
 "Decision Making" Process
 -------------------------
 
-The following applies to code changes to the Particl project..
+The following applies to code changes to the Vpub project..
 
-Whether a pull request is merged into Particl Core rests with the project merge
+Whether a pull request is merged into Vpub Core rests with the project merge
 maintainers and ultimately the project lead.
 
 Maintainers will take into consideration if a patch is in line with the general
@@ -206,7 +206,7 @@ In general, all pull requests must:
   - Where bugs are fixed, where possible, there should be unit tests
     demonstrating the bug and also proving the fix. This helps prevent regression.
 
-Patches that change Particl consensus rules are considerably more involved than
+Patches that change Vpub consensus rules are considerably more involved than
 normal because they affect the entire ecosystem and so must be preceded by
 extensive mailing list discussions and have a numbered PIP. While each case will
 be different, one should be prepared to expend more time and effort than for
@@ -247,7 +247,7 @@ higher in terms of discussion and peer review requirements, keeping in mind that
 mistakes could be very costly to the wider community. This includes refactoring
 of consensus critical code.
 
-[//]: # (Where a patch set proposes to change the Particl consensus, it must have been
+[//]: # (Where a patch set proposes to change the Vpub consensus, it must have been
 discussed extensively on the mailing list and IRC, be accompanied by a widely
 discussed BIP and have a generally widely perceived technical consensus of being
 a worthwhile change based on the judgement of the maintainers.)
@@ -287,7 +287,7 @@ about:
 Release Policy
 --------------
 
-The project leader is the release manager for each Particl Core release.
+The project leader is the release manager for each Vpub Core release.
 
 Acknowledgement
 ---------------

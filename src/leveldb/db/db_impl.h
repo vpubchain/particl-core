@@ -152,7 +152,7 @@ class DBImpl : public DB {
   SnapshotList snapshots_;
 
   // Set of table files to protect from deletion because they are
-  // part of ongoing compactions.
+  // vp of ongoing compactions.
   std::set<uint64_t> pending_outputs_;
 
   // Has a background compaction been scheduled or is running?

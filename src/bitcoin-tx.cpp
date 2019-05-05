@@ -103,7 +103,7 @@ static int AppInitRawTx(int argc, char* argv[])
     fCreateBlank = gArgs.GetBoolArg("-create", false);
 
     if (argc < 2 || HelpRequested(gArgs)) {
-        // First part of help message is specific to this utility
+        // First vp of help message is specific to this utility
         std::string strUsage = PACKAGE_NAME " vpub-tx utility version " + FormatFullVersion() + "\n\n" +
             "Usage:  vpub-tx [options] <hex-tx> [commands]  Update hex-encoded bitcoin transaction\n" +
             "or:     vpub-tx [options] -create [commands]   Create hex-encoded bitcoin transaction\n" +

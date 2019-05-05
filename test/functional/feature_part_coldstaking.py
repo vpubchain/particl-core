@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017-2018 The Particl Core developers
+# Copyright (c) 2017-2018 The Vpub Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -267,7 +267,7 @@ class ColdStakingTest(ParticlTestFramework):
 
         coincontrol = {'inputs':[{'tx':n1unspent[0]['txid'],'n':n1unspent[0]['vout']}]}
         outputs = [{'address':addr2_1s, 'amount':1, 'narr':'p2b,0->2'},]
-        txid = nodes[0].sendtypeto('part', 'blind', outputs, 'comment', 'comment-to', 4, 64, False, coincontrol)
+        txid = nodes[0].sendtypeto('vp', 'blind', outputs, 'comment', 'comment-to', 4, 64, False, coincontrol)
 
         self.sync_all()
 

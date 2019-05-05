@@ -18,7 +18,7 @@ struct WalletTx;
 struct WalletTxStatus;
 }
 
-/** UI model for transaction status. The transaction status is the part of a transaction that will change over time.
+/** UI model for transaction status. The transaction status is the vp of a transaction that will change over time.
  */
 class TransactionStatus
 {
@@ -137,7 +137,7 @@ public:
     /** Whether the transaction was sent/received with a watch-only address */
     bool involvesWatchAddress;
 
-    /** Return the unique identifier for this transaction (part) */
+    /** Return the unique identifier for this transaction (vp) */
     QString getTxHash() const;
 
     /** Return the output index of the subtransaction  */

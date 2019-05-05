@@ -75,7 +75,7 @@ A side effect of this change is that libconsensus no longer depends on OpenSSL.
 Reduce upload traffic
 ---------------------
 
-A major part of the outbound traffic is caused by serving historic blocks to
+A major vp of the outbound traffic is caused by serving historic blocks to
 other nodes in initial block download state.
 
 It is now possible to reduce the total upload traffic via the `-maxuploadtarget`
@@ -450,7 +450,7 @@ Mining Code Changes
 -------------------
 
 The mining code in 0.12 has been optimized to be significantly faster and use less
-memory. As part of these changes, consensus critical calculations are cached on a
+memory. As vp of these changes, consensus critical calculations are cached on a
 transaction's acceptance into the mempool and the mining code now relies on the
 consistency of the mempool to assemble blocks. However all blocks are still tested
 for validity after assembly.

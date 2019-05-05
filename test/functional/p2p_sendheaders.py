@@ -23,7 +23,7 @@ headers.
 test_nonnull_locators
 =====================
 
-Part 1: No headers announcements before "sendheaders"
+Vp 1: No headers announcements before "sendheaders"
 a. node mines a block [expect: inv]
    send getdata for the block [expect: block]
 b. node mines another block [expect: inv]
@@ -32,7 +32,7 @@ c. node mines another block [expect: inv]
    peer mines a block, announces with header [expect: getdata]
 d. node mines another block [expect: inv]
 
-Part 2: After "sendheaders", headers announcements should generally work.
+Vp 2: After "sendheaders", headers announcements should generally work.
 a. peer sends sendheaders [expect: no response]
    peer sends getheaders with current tip [expect: no response]
 b. node mines a block [expect: tip header]
@@ -42,7 +42,7 @@ c. for N in 1, ..., 10:
        [ expect: getheaders/getdata or getdata, deliver block(s) ]
      - node mines a block [ expect: 1 header ]
 
-Part 3: Headers announcements stop after large reorg and resume after getheaders or inv from peer.
+Vp 3: Headers announcements stop after large reorg and resume after getheaders or inv from peer.
 - For response-type in {inv, getheaders}
   * node mines a 7 block reorg [ expect: headers announcement of 8 blocks ]
   * node mines an 8-block reorg [ expect: inv at tip ]
@@ -55,7 +55,7 @@ Part 3: Headers announcements stop after large reorg and resume after getheaders
   * peer sends response-type [expect headers if getheaders, getheaders/getdata if mining new block]
   * node mines 1 block [expect: 1 header, peer responds with getdata]
 
-Part 4: Test direct fetch behavior
+Vp 4: Test direct fetch behavior
 a. Announce 2 old block headers.
    Expect: no getdata requests.
 b. Announce 3 new blocks via 1 headers message.
@@ -70,7 +70,7 @@ e. Announce 16 more headers that build on that fork.
 f. Announce 1 more header that builds on that fork.
    Expect: no response.
 
-Part 5: Test handling of headers that don't connect.
+Vp 5: Test handling of headers that don't connect.
 a. Repeat 10 times:
    1. Announce a header that doesn't connect.
       Expect: getheaders message
@@ -280,9 +280,9 @@ class SendHeadersTest(BitcoinTestFramework):
 
         # VP 1
         # 1. Mine a block; expect inv announcements each time
-        self.log.info("Part 1: headers don't start before sendheaders message...")
+        self.log.info("Vp 1: headers don't start before sendheaders message...")
         for i in range(4):
-            self.log.debug("Part 1.{}: starting...".format(i))
+            self.log.debug("Vp 1.{}: starting...".format(i))
             old_tip = tip
             tip = self.mine_blocks(1)
             inv_node.check_last_inv_announcement(inv=[tip])
@@ -314,8 +314,8 @@ class SendHeadersTest(BitcoinTestFramework):
                 inv_node.clear_block_announcements()
                 test_node.clear_block_announcements()
 
-        self.log.info("Part 1: success!")
-        self.log.info("Part 2: announce blocks with headers after sendheaders message...")
+        self.log.info("Vp 1: success!")
+        self.log.info("Vp 2: announce blocks with headers after sendheaders message...")
         # VP 2
         # 2. Send a sendheaders message and test that headers announcements
         # commence and keep working.
@@ -332,13 +332,13 @@ class SendHeadersTest(BitcoinTestFramework):
         height = self.nodes[0].getblockcount() + 1
         block_time += 10  # Advance far enough ahead
         for i in range(10):
-            self.log.debug("Part 2.{}: starting...".format(i))
+            self.log.debug("Vp 2.{}: starting...".format(i))
             # Mine i blocks, and alternate announcing either via
             # inv (of tip) or via headers. After each, new blocks
             # mined by the node should successfully be announced
             # with block header, even though the blocks are never requested
             for j in range(2):
-                self.log.debug("Part 2.{}.{}: starting...".format(i, j))
+                self.log.debug("Vp 2.{}.{}: starting...".format(i, j))
                 blocks = []
                 for b in range(i + 1):
                     blocks.append(create_block(tip, create_coinbase(height), block_time))
@@ -378,14 +378,14 @@ class SendHeadersTest(BitcoinTestFramework):
                 height += 1
                 block_time += 1
 
-        self.log.info("Part 2: success!")
+        self.log.info("Vp 2: success!")
 
-        self.log.info("Part 3: headers announcements can stop after large reorg, and resume after headers/inv from peer...")
+        self.log.info("Vp 3: headers announcements can stop after large reorg, and resume after headers/inv from peer...")
 
         # VP 3.  Headers announcements can stop after large reorg, and resume after
         # getheaders or inv from peer.
         for j in range(2):
-            self.log.debug("Part 3.{}: starting...".format(j))
+            self.log.debug("Vp 3.{}: starting...".format(j))
             # First try mining a reorg that can propagate with header announcement
             new_block_hashes = self.mine_reorg(length=7)
             tip = new_block_hashes[-1]
@@ -412,7 +412,7 @@ class SendHeadersTest(BitcoinTestFramework):
             test_node.wait_for_block(new_block_hashes[-1])
 
             for i in range(3):
-                self.log.debug("Part 3.{}.{}: starting...".format(j, i))
+                self.log.debug("Vp 3.{}.{}: starting...".format(j, i))
 
                 # Mine another block, still should get only an inv
                 tip = self.mine_blocks(1)
@@ -445,9 +445,9 @@ class SendHeadersTest(BitcoinTestFramework):
             inv_node.check_last_inv_announcement(inv=[tip])
             test_node.check_last_headers_announcement(headers=[tip])
 
-        self.log.info("Part 3: success!")
+        self.log.info("Vp 3: success!")
 
-        self.log.info("Part 4: Testing direct fetch behavior...")
+        self.log.info("Vp 4: Testing direct fetch behavior...")
         tip = self.mine_blocks(1)
         height = self.nodes[0].getblockcount() + 1
         last_time = self.nodes[0].getblock(self.nodes[0].getbestblockhash())['time']
@@ -528,16 +528,16 @@ class SendHeadersTest(BitcoinTestFramework):
         with mininode_lock:
             assert "getdata" not in test_node.last_message
 
-        self.log.info("Part 4: success!")
+        self.log.info("Vp 4: success!")
 
         # Now deliver all those blocks we announced.
         [test_node.send_message(msg_block(x)) for x in blocks]
 
-        self.log.info("Part 5: Testing handling of unconnecting headers")
+        self.log.info("Vp 5: Testing handling of unconnecting headers")
         # First we test that receipt of an unconnecting header doesn't prevent
         # chain sync.
         for i in range(10):
-            self.log.debug("Part 5.{}: starting...".format(i))
+            self.log.debug("Vp 5.{}: starting...".format(i))
             test_node.last_message.pop("getdata", None)
             blocks = []
             # Create two more blocks.
@@ -597,7 +597,7 @@ class SendHeadersTest(BitcoinTestFramework):
         # Should get disconnected
         test_node.wait_for_disconnect()
 
-        self.log.info("Part 5: success!")
+        self.log.info("Vp 5: success!")
 
         # Finally, check that the inv node never received a getdata request,
         # throughout the test
