@@ -24,18 +24,18 @@ BITCOIN_INCLUDES=-I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFL
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBPARTICL_SERVER=libparticl_server.a
-LIBPARTICL_COMMON=libparticl_common.a
-LIBPARTICL_CONSENSUS=libparticl_consensus.a
+LIBPARTICL_SERVER=libvpub_server.a
+LIBPARTICL_COMMON=libvpub_common.a
+LIBPARTICL_CONSENSUS=libvpub_consensus.a
 LIBPARTICL_CLI=libvpub_cli.a
-LIBPARTICL_UTIL=libparticl_util.a
-LIBPARTICL_CRYPTO_BASE=crypto/libparticl_crypto_base.a
+LIBPARTICL_UTIL=libvpub_util.a
+LIBPARTICL_CRYPTO_BASE=crypto/libvpub_crypto_base.a
 LIBPARTICLQT=qt/libparticlqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
-LIBPARTICL_SMSG=libparticl_smsg.a
+LIBPARTICL_SMSG=libvpub_smsg.a
 
 if ENABLE_ZMQ
-LIBPARTICL_ZMQ=libparticl_zmq.a
+LIBPARTICL_ZMQ=libvpub_zmq.a
 endif
 if BUILD_BITCOIN_LIBS
 LIBPARTICLCONSENSUS=libparticlconsensus.la
@@ -45,20 +45,20 @@ LIBPARTICL_WALLET=libvpub_wallet.a
 LIBPARTICL_WALLET_TOOL=libvpub_wallet_tool.a
 endif
 if ENABLE_USBDEVICE
-LIBPARTICL_USBDEVICE=libparticl_usbdevice.a
+LIBPARTICL_USBDEVICE=libvpub_usbdevice.a
 endif
 
 LIBPARTICL_CRYPTO= $(LIBPARTICL_CRYPTO_BASE)
 if ENABLE_SSE41
-LIBPARTICL_CRYPTO_SSE41 = crypto/libparticl_crypto_sse41.a
+LIBPARTICL_CRYPTO_SSE41 = crypto/libvpub_crypto_sse41.a
 LIBPARTICL_CRYPTO += $(LIBPARTICL_CRYPTO_SSE41)
 endif
 if ENABLE_AVX2
-LIBPARTICL_CRYPTO_AVX2 = crypto/libparticl_crypto_avx2.a
+LIBPARTICL_CRYPTO_AVX2 = crypto/libvpub_crypto_avx2.a
 LIBPARTICL_CRYPTO += $(LIBPARTICL_CRYPTO_AVX2)
 endif
 if ENABLE_SHANI
-LIBPARTICL_CRYPTO_SHANI = crypto/libparticl_crypto_shani.a
+LIBPARTICL_CRYPTO_SHANI = crypto/libvpub_crypto_shani.a
 LIBPARTICL_CRYPTO += $(LIBPARTICL_CRYPTO_SHANI)
 endif
 
@@ -276,12 +276,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
 	  $(abs_top_srcdir)
-libparticl_util_a-clientversion.$(OBJEXT): obj/build.h
+libvpub_util_a-clientversion.$(OBJEXT): obj/build.h
 
 # server: shared between bitcoind and bitcoin-qt
-libparticl_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libparticl_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_server_a_SOURCES = \
+libvpub_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libvpub_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   banman.cpp \
@@ -339,13 +339,13 @@ libparticl_server_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 if !ENABLE_WALLET
-libparticl_server_a_SOURCES += dummywallet.cpp
+libvpub_server_a_SOURCES += dummywallet.cpp
 endif
 
 if ENABLE_ZMQ
-libparticl_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libparticl_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_zmq_a_SOURCES = \
+libvpub_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
+libvpub_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp \
@@ -353,10 +353,10 @@ libparticl_zmq_a_SOURCES = \
 endif
 
 if ENABLE_USBDEVICE
-libparticl_usbdevice_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(AM_CPPFLAGS) $(PROTOBUF_CFLAGS)
-libparticl_usbdevice_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_usbdevice_a_CFLAGS = -DHAVE_HIDAPI $(AM_CFLAGS)
-libparticl_usbdevice_a_SOURCES = \
+libvpub_usbdevice_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(AM_CPPFLAGS) $(PROTOBUF_CFLAGS)
+libvpub_usbdevice_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_usbdevice_a_CFLAGS = -DHAVE_HIDAPI $(AM_CFLAGS)
+libvpub_usbdevice_a_SOURCES = \
   usbdevice/usbwrapper.cpp \
   usbdevice/usbwrapper.h \
   usbdevice/ledger/btchipApdu.h \
@@ -376,7 +376,7 @@ libparticl_usbdevice_a_SOURCES = \
   usbdevice/trezordevice.h \
   usbdevice/trezordevice.cpp \
   usbdevice/rpcusbdevice.cpp
-nodist_libparticl_usbdevice_a_SOURCES = \
+nodist_libvpub_usbdevice_a_SOURCES = \
   usbdevice/trezor/messages.pb.h \
   usbdevice/trezor/messages.pb.cc \
   usbdevice/trezor/messages-common.pb.h \
@@ -385,7 +385,7 @@ nodist_libparticl_usbdevice_a_SOURCES = \
   usbdevice/trezor/messages-management.pb.cc \
   usbdevice/trezor/messages-bitcoin.pb.h \
   usbdevice/trezor/messages-bitcoin.pb.cc
-BUILT_SOURCES = $(nodist_libparticl_usbdevice_a_SOURCES)
+BUILT_SOURCES = $(nodist_libvpub_usbdevice_a_SOURCES)
 endif
 
 # wallet: shared between bitcoind and bitcoin-qt, but only linked
@@ -423,9 +423,9 @@ libvpub_wallet_tool_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libparticl_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libparticl_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libparticl_crypto_base_a_SOURCES = \
+crypto_libvpub_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libvpub_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libvpub_crypto_base_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha20.h \
@@ -447,31 +447,31 @@ crypto_libparticl_crypto_base_a_SOURCES = \
   crypto/siphash.h
 
 if USE_ASM
-crypto_libparticl_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libvpub_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
-crypto_libparticl_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libparticl_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libparticl_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
-crypto_libparticl_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
-crypto_libparticl_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
+crypto_libvpub_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libvpub_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libvpub_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
+crypto_libvpub_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
+crypto_libvpub_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
 
-crypto_libparticl_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libparticl_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libparticl_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
-crypto_libparticl_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
-crypto_libparticl_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
+crypto_libvpub_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libvpub_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libvpub_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
+crypto_libvpub_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
+crypto_libvpub_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
 
-crypto_libparticl_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libparticl_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libparticl_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
-crypto_libparticl_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
-crypto_libparticl_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
+crypto_libvpub_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libvpub_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libvpub_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
+crypto_libvpub_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
+crypto_libvpub_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
 
 # consensus: shared between all executables that validate any consensus rules.
-libparticl_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_consensus_a_SOURCES = \
+libvpub_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -505,9 +505,9 @@ libparticl_consensus_a_SOURCES = \
   version.h
 
 # common: shared between bitcoind, and bitcoin-qt and non-server tools
-libparticl_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_common_a_SOURCES = \
+libvpub_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_common_a_SOURCES = \
   base58.cpp \
   bech32.cpp \
   chainparams.cpp \
@@ -544,9 +544,9 @@ libparticl_common_a_SOURCES = \
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libparticl_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_util_a_SOURCES = \
+libvpub_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -569,9 +569,9 @@ libparticl_util_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 
-libparticl_smsg_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_smsg_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_smsg_a_SOURCES = \
+libvpub_smsg_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_smsg_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_smsg_a_SOURCES = \
   lz4/lz4.h \
   lz4/lz4.c \
   xxhash/xxhash.h \
@@ -586,7 +586,7 @@ libparticl_smsg_a_SOURCES = \
 
 
 if GLIBC_BACK_COMPAT
-libparticl_util_a_SOURCES += compat/glibc_compat.cpp
+libvpub_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
@@ -598,7 +598,7 @@ libvpub_cli_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 
-nodist_libparticl_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libvpub_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
@@ -709,7 +709,7 @@ endif
 # bitcoinconsensus library #
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/particlconsensus.h
-libparticlconsensus_la_SOURCES = $(crypto_libparticl_crypto_base_a_SOURCES) $(libparticl_consensus_a_SOURCES)
+libparticlconsensus_la_SOURCES = $(crypto_libvpub_crypto_base_a_SOURCES) $(libvpub_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
   libparticlconsensus_la_SOURCES += compat/glibc_compat.cpp

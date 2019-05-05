@@ -261,7 +261,7 @@ RES_ICONS = \
   qt/res/icons/address-book.png \
   qt/res/icons/about.png \
   qt/res/icons/about_qt.png \
-  qt/res/icons/particl_testnet.ico \
+  qt/res/icons/vpub_testnet.ico \
   qt/res/icons/particl.ico \
   qt/res/icons/particl.png \
   qt/res/icons/chevron.png \
@@ -461,7 +461,7 @@ QT_QM=$(QT_TS:.ts=.qm)
 
 SECONDARY: $(QT_QM)
 
-$(srcdir)/qt/bitcoinstrings.cpp: $(libparticl_server_a_SOURCES) $(libvpub_wallet_a_SOURCES) $(libparticl_common_a_SOURCES) $(libparticl_zmq_a_SOURCES) $(libparticl_consensus_a_SOURCES) $(libparticl_util_a_SOURCES)
+$(srcdir)/qt/bitcoinstrings.cpp: $(libvpub_server_a_SOURCES) $(libvpub_wallet_a_SOURCES) $(libvpub_common_a_SOURCES) $(libvpub_zmq_a_SOURCES) $(libvpub_consensus_a_SOURCES) $(libvpub_util_a_SOURCES)
 	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
 	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" COPYRIGHT_HOLDERS="$(COPYRIGHT_HOLDERS)" COPYRIGHT_HOLDERS_SUBSTITUTION="$(COPYRIGHT_HOLDERS_SUBSTITUTION)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
 
