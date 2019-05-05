@@ -9,7 +9,7 @@ import struct
 import time
 import base64
 
-from test_framework.test_particl import ParticlTestFramework
+from test_framework.test_vpub import ParticlTestFramework
 from test_framework.test_framework import SkipTest
 from test_framework.util import bytes_to_hex_str
 
@@ -36,7 +36,7 @@ class ZMQTest(ParticlTestFramework):
         config.read_file(open(self.options.configfile))
 
         if not config["components"].getboolean("ENABLE_ZMQ"):
-            raise SkipTest("particld has not been built with zmq enabled.")
+            raise SkipTest("vpubd has not been built with zmq enabled.")
 
         self.zmq = zmq
         self.zmqContext = zmq.Context()

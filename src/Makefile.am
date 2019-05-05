@@ -27,7 +27,7 @@ BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 LIBPARTICL_SERVER=libparticl_server.a
 LIBPARTICL_COMMON=libparticl_common.a
 LIBPARTICL_CONSENSUS=libparticl_consensus.a
-LIBPARTICL_CLI=libparticl_cli.a
+LIBPARTICL_CLI=libvpub_cli.a
 LIBPARTICL_UTIL=libparticl_util.a
 LIBPARTICL_CRYPTO_BASE=crypto/libparticl_crypto_base.a
 LIBPARTICLQT=qt/libparticlqt.a
@@ -41,8 +41,8 @@ if BUILD_BITCOIN_LIBS
 LIBPARTICLCONSENSUS=libparticlconsensus.la
 endif
 if ENABLE_WALLET
-LIBPARTICL_WALLET=libparticl_wallet.a
-LIBPARTICL_WALLET_TOOL=libparticl_wallet_tool.a
+LIBPARTICL_WALLET=libvpub_wallet.a
+LIBPARTICL_WALLET_TOOL=libvpub_wallet_tool.a
 endif
 if ENABLE_USBDEVICE
 LIBPARTICL_USBDEVICE=libparticl_usbdevice.a
@@ -88,18 +88,18 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += particld
+  bin_PROGRAMS += vpubd
 endif
 
 if BUILD_BITCOIN_CLI
-  bin_PROGRAMS += particl-cli
+  bin_PROGRAMS += vpub-cli
 endif
 if BUILD_BITCOIN_TX
-  bin_PROGRAMS += particl-tx
+  bin_PROGRAMS += vpub-tx
 endif
 if ENABLE_WALLET
 if BUILD_BITCOIN_WALLET
-  bin_PROGRAMS += particl-wallet
+  bin_PROGRAMS += vpub-wallet
 endif
 endif
 
@@ -390,9 +390,9 @@ endif
 
 # wallet: shared between bitcoind and bitcoin-qt, but only linked
 # when wallet enabled
-libparticl_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_wallet_a_SOURCES = \
+libvpub_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_wallet_a_SOURCES = \
   interfaces/wallet.cpp \
   wallet/coincontrol.cpp \
   wallet/crypter.cpp \
@@ -416,9 +416,9 @@ libparticl_wallet_a_SOURCES = \
   wallet/coinselection.cpp \
   $(BITCOIN_CORE_H)
 
-libparticl_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_wallet_tool_a_SOURCES = \
+libvpub_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_wallet_tool_a_SOURCES = \
   wallet/wallettool.cpp \
   $(BITCOIN_CORE_H)
 
@@ -591,9 +591,9 @@ AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
 # cli: shared between bitcoin-cli and bitcoin-qt
-libparticl_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libparticl_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libparticl_cli_a_SOURCES = \
+libvpub_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libvpub_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libvpub_cli_a_SOURCES = \
   rpc/client.cpp \
   $(BITCOIN_CORE_H)
 
@@ -634,35 +634,35 @@ endif
 
 # bitcoin-cli binary #
 #$(BITCOIN_CLI_NAME)_SOURCES = bitcoin-cli.cpp
-particl_cli_SOURCES = bitcoin-cli.cpp
-particl_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-particl_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-particl_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+vpub_cli_SOURCES = bitcoin-cli.cpp
+vpub_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+vpub_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vpub_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-particl_cli_SOURCES += bitcoin-cli-res.rc
+vpub_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-particl_cli_LDADD = \
+vpub_cli_LDADD = \
   $(LIBPARTICL_CLI) \
   $(LIBUNIVALUE) \
   $(LIBPARTICL_UTIL) \
   $(LIBPARTICL_CRYPTO)
 
-particl_cli_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+vpub_cli_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-particl_tx_SOURCES = bitcoin-tx.cpp
-particl_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-particl_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-particl_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+vpub_tx_SOURCES = bitcoin-tx.cpp
+vpub_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+vpub_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vpub_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-particl_tx_SOURCES += bitcoin-tx-res.rc
+vpub_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-particl_tx_LDADD = \
+vpub_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBPARTICL_COMMON) \
   $(LIBPARTICL_UTIL) \
@@ -670,20 +670,20 @@ particl_tx_LDADD = \
   $(LIBPARTICL_CRYPTO) \
   $(LIBSECP256K1)
 
-particl_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+vpub_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoin-wallet binary #
-particl_wallet_SOURCES = bitcoin-wallet.cpp
-particl_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-particl_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-particl_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+vpub_wallet_SOURCES = bitcoin-wallet.cpp
+vpub_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+vpub_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+vpub_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-particl_wallet_SOURCES += bitcoin-wallet-res.rc
+vpub_wallet_SOURCES += bitcoin-wallet-res.rc
 endif
 
-particl_wallet_LDADD = \
+vpub_wallet_LDADD = \
   $(LIBPARTICL_WALLET_TOOL) \
   $(LIBPARTICL_SERVER) \
   $(LIBPARTICL_WALLET) \
@@ -700,9 +700,9 @@ particl_wallet_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-particl_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+vpub_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 if ENABLE_USBDEVICE
-particl_wallet_LDADD += $(USB_LIBS) $(HIDAPI_LIBS) $(PROTOBUF_LIBS)
+vpub_wallet_LDADD += $(USB_LIBS) $(HIDAPI_LIBS) $(PROTOBUF_LIBS)
 endif
 #
 

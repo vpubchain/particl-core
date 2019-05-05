@@ -7,7 +7,7 @@ import os
 import json
 import configparser
 
-from test_framework.test_particl import (
+from test_framework.test_vpub import (
     ParticlTestFramework,
     isclose,
     getIndexAtProperty,
@@ -44,7 +44,7 @@ class USBDeviceTest(ParticlTestFramework):
         config.read_file(open(self.options.configfile))
 
         if not config["components"].getboolean("ENABLE_USBDEVICE"):
-            raise SkipTest("particld has not been built with usb device enabled.")
+            raise SkipTest("vpubd has not been built with usb device enabled.")
 
         nodes = self.nodes
 

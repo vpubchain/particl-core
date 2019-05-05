@@ -9,7 +9,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over `/Applications/Particl-Qt` (on Mac)
-or `particld`/`particl-qt` (on Linux).
+or `vpubd`/`vpub-qt` (on Linux).
 
 If your node has a txindex, the txindex db will be migrated the first time you run 0.17.0 or newer, which may take up to a few hours. Your node will not be functional until this migration completes.
 
@@ -134,7 +134,7 @@ outside of sections.
 
 A new 'label' API has been introduced for the wallet. This is intended as a
 replacement for the deprecated 'account' API. The 'account' can continue to
-be used in V0.17 by starting particld with the '-deprecatedrpc=accounts'
+be used in V0.17 by starting vpubd with the '-deprecatedrpc=accounts'
 argument, and will be fully removed in V0.18.
 
 The label RPC methods mirror the account functionality, with the following functional differences:
@@ -294,7 +294,7 @@ hardware implementations will typically implement multiple roles simultaneously.
   `pubkeys`, `sigsrequired`, `pubkey`, `addresses`, `embedded`, `iscompressed`,
   `account`, `timestamp`, `hdkeypath`, `hdmasterkeyid`.
 - `signrawtransaction` is deprecated and will be fully removed in v0.18. To use
-  `signrawtransaction` in v0.17, restart particld with
+  `signrawtransaction` in v0.17, restart vpubd with
   `-deprecatedrpc=signrawtransaction`. Projects should transition to using
   `signrawtransactionwithkey` and `signrawtransactionwithwallet` before
   upgrading to v0.18.
@@ -308,7 +308,7 @@ Other API changes
 
 - The log timestamp format is now ISO 8601 (e.g. "2018-02-28T12:34:56Z").
 
-- When running particld with `-debug` but without `-daemon`, logging to stdout
+- When running vpubd with `-debug` but without `-daemon`, logging to stdout
   is now the default behavior. Setting `-printtoconsole=1` no longer implicitly
   disables logging to debug.log. Instead, logging to file can be explicitly disabled
   by setting `-debuglogfile=0`.
@@ -317,7 +317,7 @@ Transaction index changes
 -------------------------
 
 The transaction index is now built separately from the main node procedure,
-meaning the `-txindex` flag can be toggled without a full reindex. If particld
+meaning the `-txindex` flag can be toggled without a full reindex. If vpubd
 is run with `-txindex` on a node that is already partially or fully synced
 without one, the transaction index will be built in the background and become
 available once caught up. When switching from running `-txindex` to running
@@ -611,7 +611,7 @@ Cold Staking Features in QT
 - #13659 `90b1c7e` add missing leveldb defines (theuni)
 - #13368 `c0f1569` Update gitian-build.sh for docker (achow101)
 - #13171 `19d8ca5` Change gitian-descriptors to use bionic instead (ken2812221)
-- #13604 `75bea05` Add depends 32-bit arm support for particl-qt (TheCharlatan)
+- #13604 `75bea05` Add depends 32-bit arm support for vpub-qt (TheCharlatan)
 - #13623 `9cdb19f` Migrate gitian-build.sh to python (ken2812221)
 - #13689 `8c36432` disable Werror when building zmq (greenaddress)
 - #13617 `cf7f9ae` release: Require macos 10.10+ (fanquake)
@@ -619,7 +619,7 @@ Cold Staking Features in QT
 - #13095 `415f2bf` update `ax_boost_chrono`/`unit_test_framework` (fanquake)
 - #13732 `e8ffec6` Fix Qt's rcc determinism (Fuzzbawls)
 - #13782 `8284f1d` Fix osslsigncode compile issue in gitian-build (ken2812221)
-- #13696 `2ab7208` Add aarch64 qt depends support for cross compiling particl-qt (TheCharlatan)
+- #13696 `2ab7208` Add aarch64 qt depends support for cross compiling vpub-qt (TheCharlatan)
 - #13705 `b413ba0` Add format string linter (practicalswift)
 - #14000 `48c8459` fix qt determinism (theuni)
 - #14018 `3e4829a` Bugfix: NSIS: Exclude `Makefile*` from docs (luke-jr)
@@ -725,7 +725,7 @@ Cold Staking Features in QT
 - #13219 `08516e0` bench: Add block assemble benchmark (MarcoFalke)
 - #13530 `b1dc39d` bench: Add missing pow.h header (laanwj)
 - #12686 `2643fa5` Add -ftrapv to CFLAGS and CXXFLAGS when --enable-debug is used. Enable -ftrapv in Travis (practicalswift)
-- #12882 `d96bdd7` Make `test_particl` pass under ThreadSanitzer (clang). Fix lock-order-inversion (potential deadlock) (practicalswift)
+- #12882 `d96bdd7` Make `test_vpub` pass under ThreadSanitzer (clang). Fix lock-order-inversion (potential deadlock) (practicalswift)
 - #13535 `2328039` `wallet_basic`: Specify minimum required amount for listunspent (MarcoFalke)
 - #13551 `c93c360` Fix incorrect documentation for test case `cuckoocache_hit_rate_ok` (practicalswift)
 - #13563 `b330f3f` bench: Simplify coinselection (promag)
@@ -787,8 +787,8 @@ Cold Staking Features in QT
 - #10694 `ae5bcc7` Remove redundant code in MutateTxSign(CMutableTransaction&, const std::string&) (practicalswift)
 - #12659 `3d16f58` Improve Fatal LevelDB Log Messages (eklitzke)
 - #12643 `0f0229d` util: Remove unused `sync_chain` (MarcoFalke)
-- #12102 `7fb8fb4` Apply hardening measures in particld systemd service file (Flowdalic)
-- #12652 `55f490a` particl-cli: Provide a better error message when particld is not running (practicalswift)
+- #12102 `7fb8fb4` Apply hardening measures in vpubd systemd service file (Flowdalic)
+- #12652 `55f490a` vpub-cli: Provide a better error message when vpubd is not running (practicalswift)
 - #12630 `c290508` Provide useful error message if datadir is not writable (murrayn)
 - #11881 `624bee9` Remove Python2 support (jnewbery)
 - #12821 `082e26c` contrib: Remove unused import string (MarcoFalke)
@@ -809,7 +809,7 @@ Cold Staking Features in QT
 - #13031 `826acc9` Fix for utiltime to compile with msvc (sipsorcery)
 - #13119 `81743b5` Remove script to clean up datadirs (MarcoFalke)
 - #12954 `5a66642` util: Refactor logging code into a global object (jimpo)
-- #12769 `35eb9d6` Add systemd service to particld in debian package (ghost)
+- #12769 `35eb9d6` Add systemd service to vpubd in debian package (ghost)
 - #13146 `0bc980b` rpcauth: Make it possible to provide a custom password (laanwj)
 - #13148 `b62b437` logging: Fix potential use-after-free in logprintstr(…) (practicalswift)
 - #13214 `0612d96` Enable Travis checking for two Python linting rules we are currently not violating (practicalswift)
@@ -826,7 +826,7 @@ Cold Staking Features in QT
 - #13494 `d67eff8` Follow-up to #13454: Fix broken build by exporting `LC_ALL=C` (practicalswift)
 - #13510 `03f3925` Scripts and tools: Obsolete #!/bin/bash shebang (DesWurstes)
 - #13577 `c9eb8d1` logging: Avoid nstart may be used uninitialized in appinitmain warning (mruddy)
-- #13603 `453ae5e` particl-tx: Stricter check for valid integers (domob1812)
+- #13603 `453ae5e` vpub-tx: Stricter check for valid integers (domob1812)
 - #13118 `c05c93c` RPCAuth Detection in Logs (Linrono)
 - #13647 `4027ec1` Scripts and tools: Fix `BIND_NOW` check in security-check.py (conradoplg)
 - #13692 `f5d166a` contrib: Clone core repo in gitian-build (MarcoFalke)
@@ -850,7 +850,7 @@ Cold Staking Features in QT
 - #13441 `4a7e64f` Prevent shared conf files from failing with different available options in different binaries (achow101)
 - #13471 `5eca4e8` For AVX2 code, also check for AVX, XSAVE, and OS support (sipa)
 - #13503 `c655b2c` Document FreeBSD quirk. Fix FreeBSD build: Use std::min<int>(…) to allow for compilation under certain FreeBSD versions (practicalswift)
-- #13725 `07ce278` Fix particl-cli --version (Empact)
+- #13725 `07ce278` Fix vpub-cli --version (Empact)
 
 ### Documentation
 - #12306 `216f9a4` Improvements to UNIX documentation (axvr)
@@ -876,7 +876,7 @@ Cold Staking Features in QT
 - #12800 `2d97611` Add note about our preference for scoped enumerations ("enum class") (practicalswift)
 - #12798 `174d016` Refer to witness reserved value as spec. in the BIP (MarcoFalke)
 - #12759 `d3908e2` Improve formatting of developer notes (eklitzke)
-- #12877 `2b54155` Use particld in Tor documentation (knoxcard)
+- #12877 `2b54155` Use vpubd in Tor documentation (knoxcard)
 - #12896 `b15485e` Fix conflicting statements about initialization in developer notes (practicalswift)
 - #12850 `319991d` add qrencode to brew install instructions (buddilla)
 - #12007 `cd8e45b` Clarify the meaning of fee delta not being a fee rate in prioritisetransaction RPC (honzik666)
@@ -926,7 +926,7 @@ Cold Staking Features in QT
 - #13895 `1cd5f2c` fix GetWarnings docs to reflect behavior (Empact)
 - #13911 `3e3a50a` Revert translated string change, clarify wallet log messages (PierreRochard)
 - #13908 `d6faea4` upgrade rescan time warning from minutes to >1 hour (masonicboom)
-- #13905 `73a09b4` fixed particl-cli -help output for help2man (hebasto)
+- #13905 `73a09b4` fixed vpub-cli -help output for help2man (hebasto)
 - #14100 `2936dbc` Change documentation for =0 for non-boolean options (laanwj)
 - #14096 `465a583` Add reference documentation for descriptors language (sipa)
 - #12757 `0c5f67b` Clarify include guard naming convention (practicalswift)

@@ -9,7 +9,7 @@ How to Upgrade
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over `/Applications/Particl-Qt` (on Mac)
-or `particld`/`particl-qt` (on Linux).
+or `vpubd`/`vpub-qt` (on Linux).
 
 Downgrading warning
 -------------------
@@ -59,7 +59,7 @@ In order to facilitate deterministic generation of stealth addresses between Par
 - New RPC command `devicegetnewstealthaddress` will generate a v2 Stealth Address from the Hardware Signing Device.
 - Updated RPC command `getnewstealthaddress` now supports a new boolean `makeV2` (default false) which will generate a v2 Stealth Address from the same method used for hardware wallets. This will be updated in a future release to default to true for all new addresses generated.
 
-Note, Legacy Stealth Addresses are not supported on Hardware Signing Devices. If you have PART/tPART received on the Legacy Stealth Addresses then we suggest you send those PART/tPART to a non-Stealth Address before attempting to use with the Hardware Signing Devices.
+Note, Legacy Stealth Addresses are not supported on Hardware Signing Devices. If you have VP/tPART received on the Legacy Stealth Addresses then we suggest you send those VP/tPART to a non-Stealth Address before attempting to use with the Hardware Signing Devices.
 
 ### Replace-By-Fee by default in GUI
 
@@ -158,8 +158,8 @@ used to create `rpcauth` credentials for a JSON-RPC user.
 Other changed command-line options
 ----------------------------------
 - `-debuglogfile=<file>` can be used to specify an alternative debug logging file.
-- particl-cli now has an `-stdinrpcpass` option to allow the RPC password to be read from standard input.
-- particl-cli now supports a new `-getinfo` flag which returns an output like that of the now-removed `getinfo` RPC.
+- vpub-cli now has an `-stdinrpcpass` option to allow the RPC password to be read from standard input.
+- vpub-cli now supports a new `-getinfo` flag which returns an output like that of the now-removed `getinfo` RPC.
 
 
 0.16.0 change log
@@ -230,7 +230,7 @@ Other changed command-line options
 - #11923 `81c89e9` Remove unused fNoncriticalErrors variable from CWalletDB::FindWalletTx (PierreRochard)
 - #11726 `604e08c` Cleanups + nit fixes for walletdir PR (MeshCollider)
 - #11403 `d889c03` Segwit wallet support (sipa)
-- #11970 `b7450cd` Add test coverage for particl-cli multiwallet calls (ryanofsky)
+- #11970 `b7450cd` Add test coverage for vpub-cli multiwallet calls (ryanofsky)
 - #11904 `66e3af7` Add a lock to the wallet directory (MeshCollider)
 - #12101 `c7978be` Clamp walletpassphrase timeout to 2^30 seconds and check its bounds (achow101)
 - #12210 `17180fa` Deprecate addwitnessaddress (laanwj)
@@ -243,7 +243,7 @@ Other changed command-line options
 ### RPC and other APIs
 - #11008 `3841aaf` Enable disablesafemode by default (gmaxwell)
 - #11050 `7ed57d3` Avoid treating null RPC arguments different from missing arguments (ryanofsky)
-- #10997 `affe927` Add option -stdinrpcpass to particl-cli to allow RPC password to be read from standard input (jharvell)
+- #10997 `affe927` Add option -stdinrpcpass to vpub-cli to allow RPC password to be read from standard input (jharvell)
 - #11179 `e0e3cbb` Push down safe mode checks (laanwj)
 - #11203 `d745b4c` add wtxid to mempool entry output (sdaftuar)
 - #11099 `bc561b4` Add savemempool RPC (greenaddress)
@@ -338,7 +338,7 @@ Other changed command-line options
 - #11903 `8f68fd2` [trivial] Add required package dependencies for depends cross compilation (jonasschnelli)
 - #12168 `45cf8a0`  #include sys/fcntl.h to just fcntl.h (without sys/) (jsarenik)
 - #12095 `3fa1ab4` Use BDB_LIBS/CFLAGS and pass --disable-replication (fanquake)
-- #11711 `6378e5c` particl_qt.m4: Minor fixes and clean-ups (fanquake)
+- #11711 `6378e5c` vpub_qt.m4: Minor fixes and clean-ups (fanquake)
 - #11989 `90d4104` .gitignore: add QT Creator artifacts (Sjors)
 - #11577 `c0ae864` Fix warnings (-Wsign-compare) when building with DEBUG_ADDRMAN (practicalswift)
 
@@ -540,8 +540,8 @@ Other changed command-line options
 
 ### Miscellaneous
 - #11246 `777519b` github-merge: Coalesce git fetches (laanwj)
-- #10871 `c9a4aa8` Handle getinfo in particl-cli w/ -getinfo (revival of #8843) (achow101)
-- #11419 `093074b` Utils: Fix launchctl not being able to stop particld (OmeGak)
+- #10871 `c9a4aa8` Handle getinfo in vpub-cli w/ -getinfo (revival of #8843) (achow101)
+- #11419 `093074b` Utils: Fix launchctl not being able to stop vpubd (OmeGak)
 - #11394 `6e4e98e` Perform a weaker subtree check in Travis (sipa)
 - #11702 `4122112` [build] Add a script for installing db4 (jamesob)
 - #11794 `dd49862` Prefix leveldb debug logging (laanwj)
@@ -558,7 +558,7 @@ Other changed command-line options
 - #11951 `1fb34e0` Remove dead feeest-file read code for old versions (TheBlueMatt)
 - #11421 `9ccafb1` Merge current secp256k1 subtree (MarcoFalke)
 - #11573 `2631d55` [Util] Update tinyformat.h (fanquake)
-- #10529 `331352f` Improve particld systemd service file (Flowdalic)
+- #10529 `331352f` Improve vpubd systemd service file (Flowdalic)
 - #11620 `70fec9e` [build] .gitignore: add background.tiff (Sjors)
 - #11558 `68e021e` Minimal code changes to allow msvc compilation (sipsorcery)
 - #11284 `10bee0d` Fix invalid memory access in CScript::operator+= (guidovranken, ajtowns)
