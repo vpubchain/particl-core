@@ -21,6 +21,7 @@ packages:
 - "zip"
 - "ca-certificates"
 - "python"
+- "build-essential"
 remotes:
 - "url": "https://github.com/vpubchain/particl-core.git"
   "dir": "particl-core"
