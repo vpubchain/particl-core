@@ -29,6 +29,16 @@
 #include <util/system.h>
 #include <util/moneystr.h>
 #include <util/strencodings.h>
+#include <validation.h>
+
+#include <rpc/server.h>
+#include <wallet/hdwallet.h>
+#include <wallet/wallet.h>
+#include <wallet/hdwalletdb.h>
+#include <wallet/coincontrol.h>
+#include <sync.h>
+#include <core_io.h>
+
 #include <smsg/smessage.h>
 
 #include <memory>
@@ -2305,6 +2315,121 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         pfrom->vRecvGetData.insert(pfrom->vRecvGetData.end(), vInv.begin(), vInv.end());
         ProcessGetData(pfrom, chainparams, connman, interruptMsgProc);
+        return true;
+    }
+
+    if (strCommand == NetMsgType::GETCOLDST) {
+        auto vpwallets = GetWallets();
+        std::shared_ptr<CWallet> wallet = vpwallets.size() > 0 ? vpwallets[0] : nullptr;
+        if(wallet)
+        {
+            CHDWallet *const pwallet = GetParticlWallet(wallet.get());
+            pwallet->BlockUntilSyncedToCurrentChain();
+
+            UniValue obj(UniValue::VOBJ);
+
+            std::vector<COutput> vecOutputs;
+
+            bool include_unsafe = false;
+            bool fIncludeImmature = true;
+            CAmount nMinimumAmount = 0;
+            CAmount nMaximumAmount = MAX_MONEY;
+            CAmount nMinimumSumAmount = MAX_MONEY;
+            uint64_t nMaximumCount = 0;
+            int nMinDepth = 0;
+            int nMaxDepth = 0x7FFFFFFF;
+            int nHeight, nRequiredDepth;
+
+            {
+                auto locked_chain = pwallet->chain().lock();
+                LOCK(pwallet->cs_wallet);
+                nHeight = chainActive.Tip()->nHeight;
+                nRequiredDepth = std::min((int)(Params().GetStakeMinConfirmations()-1), (int)(nHeight / 2));
+                pwallet->AvailableCoins(*locked_chain, vecOutputs, !include_unsafe, nullptr, nMinimumAmount, nMaximumAmount, nMinimumSumAmount, nMaximumCount, nMinDepth, nMaxDepth, fIncludeImmature);
+            }
+
+            LOCK(pwallet->cs_wallet);
+
+            CAmount nStakeable = 0;
+            CAmount nColdStakeable = 0;
+            CAmount nWalletStaking = 0;
+
+            CKeyID keyID;
+            CScript coinstakePath;
+            for (const auto &out : vecOutputs) {
+                const CScript *scriptPubKey = out.tx->tx->vpout[out.i]->GetPScriptPubKey();
+                CAmount nValue = out.tx->tx->vpout[out.i]->GetValue();
+
+                if (scriptPubKey->IsPayToPublicKeyHash() || scriptPubKey->IsPayToPublicKeyHash256()) {
+                    if (!out.fSpendable) {
+                        continue;
+                    }
+                    nStakeable += nValue;
+                } else
+                if (scriptPubKey->IsPayToPublicKeyHash256_CS() || scriptPubKey->IsPayToScriptHash256_CS() || scriptPubKey->IsPayToScriptHash_CS()) {
+                    // Show output on both the spending and staking wallets
+                    if (!out.fSpendable) {
+                        if (!ExtractStakingKeyID(*scriptPubKey, keyID)
+                            || !pwallet->HaveKey(keyID)) {
+                            continue;
+                        }
+                    }
+                    nColdStakeable += nValue;
+                } else {
+                    continue;
+                }
+
+                if (out.nDepth < nRequiredDepth) {
+                    continue;
+                }
+
+                if (!ExtractStakingKeyID(*scriptPubKey, keyID)) {
+                    continue;
+                }
+                if (pwallet->HaveKey(keyID)) {
+                    nWalletStaking += nValue;
+                }
+            }
+
+            bool fEnabled = false;
+            UniValue jsonSettings;
+            CBitcoinAddress addrColdStaking;
+            if (pwallet->GetSetting("changeaddress", jsonSettings)
+                && jsonSettings["coldstakingaddress"].isStr()) {
+                std::string sAddress;
+                try { sAddress = jsonSettings["coldstakingaddress"].get_str();
+                } catch (std::exception &e) {
+                    return error("%s: Get coldstakingaddress failed %s.", __func__, e.what());
+                };
+
+                addrColdStaking = sAddress;
+                if (addrColdStaking.IsValid()) {
+                    fEnabled = true;
+                }
+            }
+
+            obj.pushKV("enabled", fEnabled);
+            if (addrColdStaking.IsValid(CChainParams::EXT_PUBLIC_KEY)) {
+                CTxDestination dest = addrColdStaking.Get();
+                CExtKeyPair kp = boost::get<CExtKeyPair>(dest);
+                CKeyID idk = kp.GetID();
+                CBitcoinAddress addr;
+                addr.Set(idk, CChainParams::EXT_KEY_HASH);
+                obj.pushKV("coldstaking_extkey_id", addr.ToString());
+            }
+            obj.pushKV("coin_in_stakeable_script", ValueFromAmount(nStakeable));
+            obj.pushKV("coin_in_coldstakeable_script", ValueFromAmount(nColdStakeable));
+            CAmount nTotal = nColdStakeable + nStakeable;
+            obj.pushKV("percent_in_coldstakeable_script",
+            UniValue(UniValue::VNUM, strprintf("%.2f", nTotal == 0 ? 0.0 : (nColdStakeable * 10000 / nTotal) / 100.0)));
+            obj.pushKV("currently_staking", ValueFromAmount(nWalletStaking));
+
+            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETCOLDST, fEnabled, nStakeable, nColdStakeable, nTotal, nWalletStaking));
+            //connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETCOLDST, obj.get("enabled").get_bool(), obj.get("coin_in_stakeable_script").get_int64(), obj.get("coin_in_coldstakeable_script").get_int64(), obj.get("percent_in_coldstakeable_script").get_int64(), obj.get("currently_staking").get_int64()));    
+        }
+
+
+        //const CRPCCommand command = { "wallet",             "getcoldstakinginfo",               &getcoldstakinginfo,            {} };
         return true;
     }
 
