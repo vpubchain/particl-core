@@ -31,7 +31,7 @@ def setup():
     if not os.path.isdir('particl-core'):
         subprocess.check_call(['git', 'clone', 'https://github.com/John-Tonny/particl-core.git'])
     os.chdir('gitian-builder')
-    make_image_prog = ['bin/make-base-vm', '--suite', 'trusty', '--arch', 'amd64']
+    make_image_prog = ['bin/make-base-vm', '--suite', 'bionic', '--arch', 'amd64']
     if args.docker:
         make_image_prog += ['--docker']
     elif not args.kvm:
@@ -163,7 +163,7 @@ def main():
     args.windows = 'w' in args.os
     args.macos = 'm' in args.os
 
-    args.is_bionic = b'trusty' in subprocess.check_output(['lsb_release', '-cs'])
+    args.is_bionic = b'bionic' in subprocess.check_output(['lsb_release', '-cs'])
 
     if args.buildsign:
         args.build=True

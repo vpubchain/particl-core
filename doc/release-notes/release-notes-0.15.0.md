@@ -754,7 +754,7 @@ Low-level RPC changes
 - #11090 `8f0121c` Update contributor names in release-notes.md (Derek701)
 - #11056 `cbdd338` disable jni in builds (instagibbs)
 - #11080 `2b59cfb` doc: Update build-openbsd for 6.1 (laanwj)
-- #11119 `0a6af47` [doc] build-windows: Mention that only trusty works (MarcoFalke)
+- #11119 `0a6af47` [doc] build-windows: Mention that only bionic works (MarcoFalke)
 - #11108 `e8ad101` Changing -txindex requires -reindex, not -reindex-chainstate (TheBlueMatt)
 - #9792 `342b9bc` FastRandomContext improvements and switch to ChaCha20 (sipa)
 - #9505 `67ed40e` Prevector Quick Destruct (JeremyRubin)

@@ -110,7 +110,7 @@ jobs:
       after_success:
         - echo "Skipped upload"
     - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [trusty]  [uses qt5 dev package instead of depends Qt to speed up build and avoid timeout]'
+      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [uses qt5 dev package instead of depends Qt to speed up build and avoid timeout]'
       env: >-
         HOST=x86_64-unknown-linux-gnu
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev libudev-dev"
@@ -120,7 +120,7 @@ jobs:
         BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\" --enable-usbdevice"
 
     #- stage: test
-    #  name: 'x86_64 Linux  [GOAL: install]  [trusty]  [no functional tests, no depends, only system libs]'
+    #  name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no functional tests, no depends, only system libs]'
     #  env: >-
     #    HOST=x86_64-unknown-linux-gnu
     #    DOCKER_NAME_TAG=ubuntu:14.04
@@ -141,7 +141,7 @@ jobs:
         BITCOIN_CONFIG="--enable-zmq --disable-wallet --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER --with-sanitizers=thread --disable-hardening --disable-asm CC=clang CXX=clang++"
 
     - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [trusty]  [no depends, only system libs, sanitizers: address/leak (ASan + LSan) + undefined (UBSan) + integer]'
+      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no depends, only system libs, sanitizers: address/leak (ASan + LSan) + undefined (UBSan) + integer]'
       env: >-
         HOST=x86_64-unknown-linux-gnu
         PACKAGES="clang llvm python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
@@ -153,7 +153,7 @@ jobs:
         - echo "Skipped upload"
 
     #- stage: test
-    #  name: 'x86_64 Linux  [GOAL: install]  [trusty]  [no depends, only system libs, sanitizers: fuzzer,address]'
+    #  name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no depends, only system libs, sanitizers: fuzzer,address]'
     #  env: >-
     #    HOST=x86_64-unknown-linux-gnu
     #    PACKAGES="clang llvm python3 libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-test-dev libboost-thread-dev"
@@ -165,7 +165,7 @@ jobs:
     #    BITCOIN_CONFIG="--disable-wallet --disable-bench --with-utils=no --with-daemon=no --with-libs=no --with-gui=no --enable-fuzz --with-sanitizers=fuzzer,address CC=clang CXX=clang++"
 
     - stage: test
-      name: 'x86_64 Linux  [GOAL: install]  [trusty]  [no wallet]'
+      name: 'x86_64 Linux  [GOAL: install]  [bionic]  [no wallet]'
       env: >-
         HOST=x86_64-unknown-linux-gnu
         PACKAGES="python3-zmq"

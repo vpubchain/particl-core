@@ -706,7 +706,7 @@ git merge commit are mentioned.
 - #7789 `e0b3e19` Add note about using the Qt official binary installer (paveljanik)
 - #7791 `e30a5b0` Change Precise to Trusty in gitian-building.md (JeremyRand)
 - #7838 `8bb5d3d` Update gitian build guide to debian 8.4.0 (fanquake)
-- #7855 `b778e59` Replace precise with trusty (MarcoFalke)
+- #7855 `b778e59` Replace precise with bionic (MarcoFalke)
 - #7975 `fc23fee` Update bitcoin-core GitHub links (MarcoFalke)
 - #8034 `e3a8207` Add basic git squash workflow (fanquake)
 - #7813 `214ec0b` Update port in tor.md (MarcoFalke)

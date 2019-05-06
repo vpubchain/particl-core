@@ -3,7 +3,7 @@ name: "particl-linux-0.18.0.4"
 enable_cache: true
 sudo: true
 suites:
-- "trusty"
+- "bionic"
 architectures:
 - "amd64"
 packages:
