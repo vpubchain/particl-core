@@ -87,13 +87,13 @@ src/qt/vpub-qt.includes
 
 # Compilation and Qt preprocessor vp
 *.qm
-Makefile
+
 vpub-qt
 Vpub-Qt.app
 background.tiff*
 
 # Unit-tests
-Makefile.test
+
 vpub-qt_test
 
 # Resources cpp
