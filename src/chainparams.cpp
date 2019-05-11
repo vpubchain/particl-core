@@ -340,7 +340,7 @@ static CBlock CreateGenesisBlockMainNet(uint32_t nTime, uint32_t nNonce, uint32_
     // Reserved Particl for primary round
     // RVdtjTBEqoFPyxNDqFk72SXkvq19QtKss9
     out = MAKE_OUTPUT<CTxOutStandard>();
-    out->nValue = 6000000 * COIN;
+    out->nValue = 1000000 * COIN;
     out->scriptPubKey = CScript() << 1557633600 << OP_CHECKLOCKTIMEVERIFY << OP_DROP << OP_HASH160<< ParseHex("e24d99ce08a308b9aea101fbfc4a73115d9c690e") << OP_EQUAL; // 2017-11-30
     txNew.vpout.push_back(out);
 
