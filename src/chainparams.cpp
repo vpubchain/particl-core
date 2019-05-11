@@ -289,7 +289,7 @@ static CBlock CreateGenesisBlockTestNet(uint32_t nTime, uint32_t nNonce, uint32_
 
 static CBlock CreateGenesisBlockMainNet(uint32_t nTime, uint32_t nNonce, uint32_t nBits)
 {
-    const char *pszTimestamp = "The Times 16:00:00 17/04/2019 created by jiuling vpubchain";
+    const char *pszTimestamp = "The Times 11:00:00 11/05/2019 created by jiuling vpubchain";
 
     CMutableTransaction txNew;
     txNew.nVersion = PARTICL_TXN_VERSION;
@@ -432,7 +432,7 @@ public:
         m_assumed_chain_state_size = 1;
 
         //genesis = CreateGenesisBlockMainNet(1500296400, 31429, 0x1f00ffff); // 2017-07-17 13:00:00
-        genesis = CreateGenesisBlockMainNet(1555488000, 22074,  0x1f00ffff); // 2019-04-16 10:30:00
+        genesis = CreateGenesisBlockMainNet(1557543600, 22074,  0x1f00ffff); // 2019-05-1 11:00:00
         consensus.hashGenesisBlock = genesis.GetHash();
         
         bool fNegative;
