@@ -436,17 +436,18 @@ void ThreadStakeMiner(size_t nThreadID, std::vector<std::shared_ptr<CWallet>> &v
                     continue;
                 }
 	        /*	
-		for(int n=0;n<68;n++){
-		    ImportOutputs(pblocktemplate.get(), n + 1);
-		} 
- 		*/
-                if (nBestHeight + 1 <= nLastImportHeight
-                    && !ImportOutputs(pblocktemplate.get(), nBestHeight + 1)) {
-                    fIsStaking = false;
-                    nWaitFor = std::min(nWaitFor, (size_t)30000);
-                    LogPrint(BCLog::POS, "%s: ImportOutputs failed.\n", __func__);
-                    continue;
-                }
+		        for(int n=0;n<68;n++){
+		        ImportOutputs(pblocktemplate.get(), n + 1);
+		        } 
+ 		    */
+                // Cancel 1-68 block pre - allocation : lkz 2019-5-11
+                // if (nBestHeight + 1 <= nLastImportHeight
+                //     && !ImportOutputs(pblocktemplate.get(), nBestHeight + 1)) {
+                //     fIsStaking = false;
+                //     nWaitFor = std::min(nWaitFor, (size_t)30000);
+                //     LogPrint(BCLog::POS, "%s: ImportOutputs failed.\n", __func__);
+                //     continue;
+                // }
             }
 
             pwallet->m_is_staking = CHDWallet::IS_STAKING;
