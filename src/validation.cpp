@@ -4426,23 +4426,27 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
         if (nHeight > 0 && !block.vtx[0]->IsCoinStake()) // only genesis block can start with coinbase
             return state.DoS(100, false, REJECT_INVALID, "bad-cs-missing", false, "first tx is not coinstake");
 
-        if (nHeight > 0 // skip genesis
-            && Params().GetLastImportHeight() >= (uint32_t)nHeight)
-        {
-            // 2nd txn must be coinbase
-            if (block.vtx.size() < 2 || !block.vtx[1]->IsCoinBase())
-                return state.DoS(100, false, REJECT_INVALID, "bad-cb", false, "Second txn of import block must be coinbase");
+        // cancel 1-68 block transaction validation... : lkz 2019-5-11
+        // if (nHeight > 0 // skip genesis
+        //     && Params().GetLastImportHeight() >= (uint32_t)nHeight)
+        // {
+        //     // 2nd txn must be coinbase
+        //     if (block.vtx.size() < 2 || !block.vtx[1]->IsCoinBase())
+        //         return state.DoS(100, false, REJECT_INVALID, "bad-cb", false, "Second txn of import block must be coinbase");
 
-            // Check hash of genesis import txn matches expected hash.
-            uint256 txnHash = block.vtx[1]->GetHash();
-            if (!Params().CheckImportCoinbase(nHeight, txnHash))
-                return state.DoS(100, false, REJECT_INVALID, "bad-cb", false, "Incorrect outputs hash.");
-        } else
-        {
-            // 2nd txn can't be coinbase if block height > GetLastImportHeight
-            if (block.vtx.size() > 1 && block.vtx[1]->IsCoinBase())
+        //     // Check hash of genesis import txn matches expected hash.
+        //     uint256 txnHash = block.vtx[1]->GetHash();
+        //     if (!Params().CheckImportCoinbase(nHeight, txnHash))
+        //         return state.DoS(100, false, REJECT_INVALID, "bad-cb", false, "Incorrect outputs hash.");
+        // } else
+        // {
+        //     // 2nd txn can't be coinbase if block height > GetLastImportHeight
+        //     if (block.vtx.size() > 1 && block.vtx[1]->IsCoinBase())
+        //         return state.DoS(100, false, REJECT_INVALID, "bad-cb-multiple", false, "unexpected coinbase");
+        // };
+
+        if (block.vtx.size() > 1 && block.vtx[1]->IsCoinBase())
                 return state.DoS(100, false, REJECT_INVALID, "bad-cb-multiple", false, "unexpected coinbase");
-        };
     } else
     {
         if (nHeight >= consensusParams.BIP34Height)
