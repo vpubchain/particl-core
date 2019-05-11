@@ -531,7 +531,7 @@ public:
 
         checkpointData = {
             {
-                { 0,        uint256S("0x0000ee0141b0e3537d376a09660ffde7548c11c188518ef4fbca889e90f4dc67")},
+                { 0,        uint256S("0x0000d579b96bc1ab6bec2be990a230f64aba80e82a3b5c73660bde68b466851c")},
                 /*{ 5000,     uint256S("0xe786020ab94bc5461a07d744f3631a811b4ebf424fceda12274f2321883713f4")},
                 { 15000,    uint256S("0xafc73ac299f2e6dd309077d230fccef547b9fc24379c1bf324dd3683b13c61c3")},
                 { 30000,    uint256S("0x35d95c12799323d7b418fd64df9d88ef67ef27f057d54033b5b2f38a5ecaacbf")},
@@ -551,7 +551,7 @@ public:
 
         chainTxData = ChainTxData {
             // Data from rpc: getchaintxstats 4096 ff704cb42547da4efb2b32054c72c7682b7634ac34fda4ec88fe7badc666338c
-            /* nTime    */ 1555381800,
+            /* nTime    */ 1557543600,
             /* nTxCount */ 0,
             /* dTxRate  */ 0
         };
