@@ -441,7 +441,7 @@ public:
         m_assumed_chain_state_size = 1;
 
         //genesis = CreateGenesisBlockMainNet(1500296400, 31429, 0x1f00ffff); // 2017-07-17 13:00:00
-        genesis = CreateGenesisBlockMainNet(1557556200, 4603,  0x1f00ffff); // 2019-05-1 11:00:00
+        genesis = CreateGenesisBlockMainNet(1557730800, 4603,  0x1f00ffff); // 2019-05-1 11:00:00
         consensus.hashGenesisBlock = genesis.GetHash();
         
         bool fNegative;
@@ -551,7 +551,7 @@ public:
 
         chainTxData = ChainTxData {
             // Data from rpc: getchaintxstats 4096 ff704cb42547da4efb2b32054c72c7682b7634ac34fda4ec88fe7badc666338c
-            /* nTime    */ 1557556200,
+            /* nTime    */ 1557730800,
             /* nTxCount */ 0,
             /* dTxRate  */ 0
         };
