@@ -202,9 +202,9 @@ const std::pair<const char*, CAmount> genesisOutputsTestnet[] = {
 
     std::make_pair("69345d6be457b994627cf9ad5190c91459977f60",200000    * COIN),
     std::make_pair("6376a3489d220a0db00c0d734c73ab167558d07f",200000    * COIN),
-    std::make_pair("05eb66e0d695a632900934942ab77643a9c5f66",200000     * COIN),
+    std::make_pair("05eb66e0d695a632900934942ab77643a9c5f660",200000     * COIN),
     std::make_pair("04a6eb77602392ed79958be78ef9632f82cb124a",200000    * COIN),
-    std::make_pair("c43453cf155302598e3d15476664eb7e0d4e67c",200000     * COIN),
+    std::make_pair("c43453cf155302598e3d15476664eb7e0d4e67c6",200000     * COIN),
     
 };
 const size_t nGenesisOutputsTestnet = sizeof(genesisOutputsTestnet) / sizeof(genesisOutputsTestnet[0]);
