@@ -175,11 +175,11 @@ const std::pair<const char*, CAmount> regTestOutputs[] = {
 const size_t nGenesisOutputsRegtest = sizeof(regTestOutputs) / sizeof(regTestOutputs[0]);
 
 const std::pair<const char*, CAmount> genesisOutputs[] = {       
-    std::make_pair("65c4a17e0bf327e48ecbf27c71364469c771288d",50000    * COIN ),
-    std::make_pair("45037fa2cd48bbcb2bf3f7162e0b98a414e3a07c",50000    * COIN),
-    std::make_pair("ac9dd4989639205b58877abccb72b2444dda0ce2",50000    * COIN),
-    std::make_pair("91935e6a721cd13f70421561ed72c7799da815e8",50000    * COIN),
-    std::make_pair("f996659f7b18f28096b2a9131883151dce3efe47",50000    * COIN),
+    std::make_pair("65c4a17e0bf327e48ecbf27c71364469c771288d",196500    * COIN ),
+    std::make_pair("45037fa2cd48bbcb2bf3f7162e0b98a414e3a07c",196500    * COIN),
+    std::make_pair("ac9dd4989639205b58877abccb72b2444dda0ce2",196500    * COIN),
+    std::make_pair("91935e6a721cd13f70421561ed72c7799da815e8",196500    * COIN),
+    std::make_pair("f996659f7b18f28096b2a9131883151dce3efe47",196500    * COIN),
     std::make_pair("91dc3d7313bd110c962746cf9374f42f4c593cd9",5000     * COIN),
     std::make_pair("f0663080bb673560fb78199fc0fa732aa74754db",5000     * COIN),
     std::make_pair("2c350727f4458d6bad11ca6b99716264ed6c8c7f",2000     * COIN),
@@ -344,7 +344,7 @@ static CBlock CreateGenesisBlockMainNet(uint32_t nTime, uint32_t nNonce, uint32_
     // Reserved Particl for primary round
     // RVdtjTBEqoFPyxNDqFk72SXkvq19QtKss9
     out = MAKE_OUTPUT<CTxOutStandard>();
-    out->nValue = 5732500 * COIN;
+    out->nValue = 5000000 * COIN;
     out->scriptPubKey = CScript() << 1557990000 << OP_CHECKLOCKTIMEVERIFY << OP_DROP << OP_HASH160<< ParseHex("92dad3ff9b5938bb7178681ef4492e957baf7585") << OP_EQUAL; // 2017-11-30
     txNew.vpout.push_back(out);
 
