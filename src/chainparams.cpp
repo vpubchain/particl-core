@@ -240,7 +240,7 @@ static CBlock CreateGenesisBlockRegTest(uint32_t nTime, uint32_t nNonce, uint32_
 
 static CBlock CreateGenesisBlockTestNet(uint32_t nTime, uint32_t nNonce, uint32_t nBits)
 {
-    const char *pszTimestamp = "The Times 16:00:01 17/04/2019 created by jiuling vpubchain";
+    const char *pszTimestamp = "The Times 14:00:00 14/05/2019 created by jiuling vpubchain";
 
     CMutableTransaction txNew;
     txNew.nVersion = PARTICL_TXN_VERSION;
@@ -658,9 +658,9 @@ public:
         m_assumed_chain_state_size = 1;
 
         //genesis = CreateGenesisBlockTestNet(1502309248, 5924, 0x1f00ffff);
-        genesis = CreateGenesisBlockTestNet(1555488001, 16339, 0x1f00ffff); //2019-04-16 10:30:01
+        genesis = CreateGenesisBlockTestNet(1557813600, 16339, 0x1f00ffff); //2019-04-16 10:30:01
         consensus.hashGenesisBlock = genesis.GetHash();
-	/*
+	
         bool fNegative;
         bool fOverflow;
         arith_uint256 bnTarget;
@@ -688,7 +688,7 @@ public:
         std::cout << "block:" << consensus.hashGenesisBlock.GetHex() << std::endl;
         std::cout << "merkle:" << genesis.hashMerkleRoot.GetHex() << std::endl;
         std::cout << "witness:" << genesis.hashWitnessMerkleRoot.GetHex() << std::endl;
- 	*/     
+ 	    
         assert(consensus.hashGenesisBlock == uint256S("0x00000523baa77736a9b7e6b8f7a363caa8b05c84a16624801a7f4cdfa72ee98d"));
         assert(genesis.hashMerkleRoot == uint256S("0xcccc42e4463e79ee708bdbc50fcfc5b2627a1e5f4dd5091ab182abe0bb77702e"));
         assert(genesis.hashWitnessMerkleRoot == uint256S("0x78b4cbcb70f00b44f845808c78d19e734cebc7b51efee8dd0186e64e1a80028a"));
@@ -752,7 +752,7 @@ public:
 
         chainTxData = ChainTxData{
             // Data from rpc: getchaintxstats 4096 eecbeafc4b338901e3dfb6eeaefc128ef477dfe1e6f0f96bd63da27caf113ddc
-            /* nTime    */ 1555381801,
+            /* nTime    */ 1557813600,
             /* nTxCount */ 0,
             /* dTxRate  */ 0
         };
