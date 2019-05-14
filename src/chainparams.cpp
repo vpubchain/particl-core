@@ -658,7 +658,7 @@ public:
         m_assumed_chain_state_size = 1;
 
         //genesis = CreateGenesisBlockTestNet(1502309248, 5924, 0x1f00ffff);
-        genesis = CreateGenesisBlockTestNet(1557813600, 16339, 0x1f00ffff); //2019-04-16 10:30:01
+        genesis = CreateGenesisBlockTestNet(1557813600, 3344, 0x1f00ffff); //2019-05-14
         consensus.hashGenesisBlock = genesis.GetHash();
 	
         bool fNegative;
