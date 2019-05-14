@@ -194,13 +194,18 @@ const std::pair<const char*, CAmount> genesisOutputs[] = {
 const size_t nGenesisOutputs = sizeof(genesisOutputs) / sizeof(genesisOutputs[0]);
 
 const std::pair<const char*, CAmount> genesisOutputsTestnet[] = {
-    std::make_pair("109b4a2473a37e0d2014d526776148f2bf697223",2000    * COIN),
-    std::make_pair("19635cfdef04e69137643144d70869706228cddc",2000    * COIN),
-    std::make_pair("2e241d151fc5c280f66d174ac0d7e6661cd3b5fe",200000  * COIN),
-    std::make_pair("9ce287a6eafab1417358f14f308fc9bbfb63036f",2000000 * COIN),
-    std::make_pair("bbb8a60393f650fe292f7003bbefccd6f09bee71",20000   * COIN),
-    std::make_pair("b0e32584c43bfb2875a3c6f08d448b348d6dcc03",40000   * COIN),
-    std::make_pair("726a0835dc18ad3d54a530a811f08fb2bdfbabd4",80000   * COIN),
+    std::make_pair("da708d4837449773b2b992bcf632c3e5ede4b816",200000    * COIN),
+    std::make_pair("33626525f092614ffeba7184f59d377233606512",200000    * COIN),
+    std::make_pair("bff5c2122f1b15e81813264ef682f162e06570fc",200000    * COIN),
+    std::make_pair("81cf20dc7588356340f9cb9350a75454db2be90e",200000    * COIN),
+    std::make_pair("b018a97c518613f7075bb23809c20fb891097e2c",200000    * COIN),
+
+    std::make_pair("69345d6be457b994627cf9ad5190c91459977f60",200000    * COIN),
+    std::make_pair("6376a3489d220a0db00c0d734c73ab167558d07f",200000    * COIN),
+    std::make_pair("05eb66e0d695a632900934942ab77643a9c5f66",200000     * COIN),
+    std::make_pair("04a6eb77602392ed79958be78ef9632f82cb124a",200000    * COIN),
+    std::make_pair("c43453cf155302598e3d15476664eb7e0d4e67c",200000     * COIN),
+    
 };
 const size_t nGenesisOutputsTestnet = sizeof(genesisOutputsTestnet) / sizeof(genesisOutputsTestnet[0]);
 
@@ -261,28 +266,28 @@ static CBlock CreateGenesisBlockTestNet(uint32_t nTime, uint32_t nNonce, uint32_
     OUTPUT_PTR<CTxOutStandard> out = MAKE_OUTPUT<CTxOutStandard>();
     out = MAKE_OUTPUT<CTxOutStandard>();
     out->nValue = 150000 * COIN;
-    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("c598c56c9376174459b4a584a01f308f7b577ad6") << OP_EQUAL;
+    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("b0d8020986e7d6c4873295ecaf6d53d00136253d") << OP_EQUAL;
     txNew.vpout.push_back(out);
 
     // Community Initative 2 
     // rPPwm4YWWxY7PKxpE6EBFCj4piskKQRxZX
     out = MAKE_OUTPUT<CTxOutStandard>();
     out->nValue = 200000 * COIN;
-    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("3a1643663e673ad428fd1639982ae6256ab3d034") << OP_EQUAL;
+    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("df842dce26c76df7fee7a39f471858779b7ea871") << OP_EQUAL;
     txNew.vpout.push_back(out);
     
     // Reserved vpubchain
     // rQvHcgyrwFgKMnjnr147Mk72zUL71D8qre
     out = MAKE_OUTPUT<CTxOutStandard>();
     out->nValue = 1000000 * COIN;
-    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("ccf4494998f142ad39b8d0adbcff0ca5a7373d37") << OP_EQUAL;
+    out->scriptPubKey = CScript() << OP_HASH160 << ParseHex("ea4d7e3d7fd2ad3f569a21b62d19dbd4b2bb1c3d") << OP_EQUAL;
     txNew.vpout.push_back(out);
 
     // Reserved vpubchain for primary round
     // rDDoim2PGunVmhWCuDMytGAp5RtbcyqPGN
     out = MAKE_OUTPUT<CTxOutStandard>();
     out->nValue = 1000000 * COIN;
-    out->scriptPubKey = CScript() << 1555574400 << OP_CHECKLOCKTIMEVERIFY << OP_DROP << OP_HASH160<< ParseHex("4ca2fa733c2135f1a679b7fda8295846f596dc87") << OP_EQUAL; // 2017-11-30
+    out->scriptPubKey = CScript() << 1557986400 << OP_CHECKLOCKTIMEVERIFY << OP_DROP << OP_HASH160<< ParseHex("fe96ca68034a74d44bbc46cde9fa2036eb56d45b") << OP_EQUAL; // 2017-11-30
     txNew.vpout.push_back(out);
 
 
